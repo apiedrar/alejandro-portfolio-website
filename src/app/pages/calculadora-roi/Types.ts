@@ -1,0 +1,1 @@
+export type Frequency = "Diario" | "Semanal" | "Mensual" | "Anual";
