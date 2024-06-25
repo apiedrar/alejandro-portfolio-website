@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { AiOutline } from "prime-icons/ai";
 import { useState } from "react";
 
 export default function Navbar() {
@@ -18,16 +17,15 @@ export default function Navbar() {
           </Link>
           <div>
             <ul className="hidden sm:flex inline">
-              <Link href="">
+              <Link href="https://www.x.com/apiedrar/">
                 <li className="text-xl">About Me</li>
               </Link>
-              <Link href="">
+              <Link href="https://www.github.com/apiedrar/apr-portfolio-web">
                 <li className=" text-xl">Check on GitHub</li>
               </Link>
             </ul>
           </div>
           <div>
-            <AiOutlineMenu size={25} />
           </div>
         </div>
       </nav>
