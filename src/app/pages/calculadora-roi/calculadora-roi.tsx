@@ -7,9 +7,9 @@ import { InputNumber } from "primereact/inputnumber";
 import { RadioButton } from "primereact/radiobutton";
 import "primereact/resources/themes/mira/theme.css";
 import "primeflex/primeflex.css";
-import "./calc.css";
+import "./calculadora-roi.css";
 
-export default function Home() {
+export default function CalculadoraROI() {
   const [initialDeposit, setInitialDeposit] = useState();
   const [contribution, setContribution] = useState();
   const [frequency, setFrequency] = useState<Frequency>("Mensual");
