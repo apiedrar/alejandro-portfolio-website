@@ -15,7 +15,7 @@ export default function Term() {
               name="pay-term"
               value={term}
               onChange={(e) => setTerm(e.value)}
-              className="p-slider p-slider-handle w-300px spacing3"
+              className="p-slider p-slider-handle w-300px"
               min={1}
               max={40}
             />

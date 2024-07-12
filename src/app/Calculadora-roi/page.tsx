@@ -1,8 +1,6 @@
 "use client";
 import Navbar from "@/app/Navbar.jsx";
-import { useState } from "react";
 import { Button } from "primereact/button";
-import { Slider } from "primereact/slider";
 import InitialDeposit from "./InitialDeposit.jsx";
 import Contribution from "./Contribution.jsx";
 import DepositFrequency from "./Frequency.jsx";
@@ -45,7 +43,7 @@ export default function CalculadoraRoi() {
               <DepositFrequency />
             </div>
           </div>
-          <div className="slider-spacing term-of-investment">
+          <div className="slider-spacing">
             <label htmlFor="pay-term" className="spacing toplabel">
               TERM OF INVESTMENT
             </label>
