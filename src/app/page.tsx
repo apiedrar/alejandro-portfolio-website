@@ -30,8 +30,9 @@ export default function Home() {
 
       <div className="mb-5 grid text-center lg:mb-0 lg:w-full lg:max-w-7xl lg:grid-cols-5 lg:text-left lg:place-items-stretch">
         <Link
-          href="/pages/Calculadora-roi"
+          href="/Calculadora-roi"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+          rel="noopener noreferrer"
         >
           <h2 className="mb-2 text-2xl font-semibold">
             Spanish ROI Calculator{" "}
@@ -61,11 +62,9 @@ export default function Home() {
           </p>
         </Link>
 
-        <a
+        <Link
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
         >
           <h2 className="mb-2 text-2xl font-semibold">
             Mockddit Phone Home{" "}
@@ -77,9 +76,9 @@ export default function Home() {
             Built using React and Redux, and integrating real data from Reddit's
             API.
           </p>
-        </a>
+        </Link>
 
-        <a
+        <Link
           href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           target="_blank"
@@ -95,9 +94,9 @@ export default function Home() {
             A simple game based off of a beloved franchise! Built in old
             fashioned HTML, CSS and JavaScript.
           </p>
-        </a>
+        </Link>
 
-        <a
+        <Link
           href="https://www.daniegan.studio"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           target="_blank"
@@ -112,7 +111,7 @@ export default function Home() {
           <p className="mt-2 max-w-[30ch] text-balance text-sm">
             Take a look at the latest collaboration I'm most proud of (To Date).
           </p>
-        </a>
+        </Link>
       </div>
     </main>
   );

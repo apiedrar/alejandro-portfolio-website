@@ -12,14 +12,14 @@ export default function Navbar() {
     return(
         <nav className="fixed w-screen h-24 mb-100px bg-[#d6dbdcc7] dark:bg-black">
         <div className="flex justify-between items-center h-full w-full px-4">
-          <Link href="https://www.linkedin.com/in/apiedrar/">
+          <Link href="/">
             <h1 className="text-lg lg:text-5xl inline">
               Alejandro Piedra Rios
             </h1>
           </Link>
           <div className="hidden sm:flex">
             <ul className="hidden sm:flex">
-              <Link href="https://www.x.com/apiedrar/">
+              <Link href="https://www.linkedin.com/in/apiedrar/">
                 <li className="ml-5 hover:border p-4 text-xl">About Me</li>
               </Link>
               <Link href="https://www.github.com/apiedrar/apr-portfolio-web">

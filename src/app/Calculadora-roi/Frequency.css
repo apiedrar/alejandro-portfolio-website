@@ -1,0 +1,38 @@
+.radio {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 50% 50%;
+  justify-content: space-between;
+  margin-bottom: 6%;
+}
+
+.p-radiobutton-input:checked + .p-radiobutton-box {
+  border: 6px solid #a3309c;
+}
+
+.p-radiobutton-box {
+  background-color: transparent;
+  border: 1px solid black;
+}
+
+@media (prefers-color-scheme: dark) {
+  .p-radiobutton-box {
+    border: 1px solid white;
+  }
+}
+
+.p-radiobutton-icon {
+  background-color: transparent;
+}
+
+.individual-radio-containers {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.radiolabel {
+  font-size: 24px;
+  font-weight: 400;
+}

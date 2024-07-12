@@ -1,3 +1,7 @@
+body {
+  min-height: 100vh;
+}
+
 main {
   display: flex;
   flex-direction: row;
@@ -6,8 +10,8 @@ main {
 }
 
 .roi-calculus {
-  width: 1200px;
-  height: 754px;
+  width: 1400px;
+  height: 820px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -22,7 +26,6 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 320px;
   margin-top: 17.5%;
   margin-right: 50px;
 }
@@ -31,7 +34,7 @@ form {
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 3.2px;
-  color: rgb(43, 101, 60);
+  color: #7130a3;
 }
 
 .p-inputnumber-input {
@@ -43,70 +46,16 @@ form {
   letter-spacing: 0.75px;
   border-radius: 30px;
   border: none;
-  color: rgb(118, 118, 118);
+  color: #767676;
 }
 
 .p-inputnumber-input:valid {
-  color: black;
-}
-
-.radiolabel {
-  font-size: 24px;
-  font-weight: 400;
-  padding-left: 5%;
+  color: #000000;
 }
 
 .spacing {
   margin-top: 5%;
   margin-bottom: 5%;
-}
-
-.radio {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 300px;
-  height: 90px;
-  vertical-align: baseline;
-  justify-content: left;
-  text-align: left;
-  margin-bottom: 6%;
-}
-
-.p-radiobutton-input:checked + .p-radiobutton-box {
-  border: 6px solid #74c947;
-}
-
-.p-radiobutton-box {
-  background-color: transparent;
-  border: 1px solid black;
-}
-
-.p-radiobutton-icon {
-  background-color: transparent;
-}
-
-.individual-radio-containers {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.anual-margin-right {
-  margin-right: 35px;
-}
-
-.monthly-margin-left {
-  margin-left: 35px;
-}
-
-.weekly-margin-right {
-  margin-right: 18px;
-}
-
-.daily-margin-left {
-  margin-left: 21px;
 }
 
 .bottom-spacing {
@@ -122,7 +71,7 @@ form {
   font-size: 22px;
   font-weight: 550;
   letter-spacing: 0.75px;
-  color: rgb(118, 118, 118);
+  color: #5c5c5c;
 }
 
 .p-slider {
@@ -131,18 +80,18 @@ form {
 
 .p-slider-range {
   border-radius: 22px;
-  background-color: rgb(116, 201, 71);
+  background-color: #a3309c;
 }
 
 .p-slider-handle {
-  border-color: rgb(43, 101, 60);
+  border-color: #7130a3;
 }
 
 .bouton {
   height: 4rem;
   width: 15rem;
-  background-color: rgb(116, 201, 71);
-  color: rgb(255, 255, 255);
+  background-color: #a3309c;
+  color: #ffffff;
   border: none;
   border-radius: 30px;
   padding: 0.75em;
@@ -153,7 +102,7 @@ form {
 .result-graph {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: first baseline;
   margin-left: 50px;
 }
@@ -175,16 +124,17 @@ form {
   font-size: 78px;
   font-weight: 600;
   border-bottom-style: dashed;
+  border-bottom-color: #a3309c;
   border-bottom-width: 3px;
   line-height: 103px;
-  color: rgb(116, 201, 71);
+  color: #a3309c;
 }
 
 .graph {
   width: 800px;
   height: 432px;
   border-radius: 22px;
-  background-color: rgb(43, 101, 60);
+  background-color: #7130a3;
 }
 
 @media (max-width: 1344px) {
