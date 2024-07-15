@@ -13,6 +13,7 @@ export default function InitialDeposit () {
         onValueChange={(e) => setInitialDeposit(e.value)}
         mode="decimal"
         prefix="US$ "
-        locale="en"
+        locale="en-us"
+        min={10}
       />)
 }

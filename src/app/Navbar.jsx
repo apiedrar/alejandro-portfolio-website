@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Bars3Icon } from "@heroicons/react/16/solid";
 import { XMarkIcon } from "@heroicons/react/16/solid";
+import { ArrowUpRightIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
 
 export default function Navbar() {
@@ -10,7 +11,7 @@ export default function Navbar() {
     }
 
     return(
-        <nav className="fixed w-screen h-24 mb-100px bg-[#d6dbdcc7] dark:bg-black">
+      <nav className="fixed w-screen h-24 mb-100px bg-[#d6dbdcc7] dark:bg-black">
         <div className="flex justify-between items-center h-full w-full px-4">
           <Link href="/">
             <h1 className="text-lg lg:text-5xl inline">
@@ -20,10 +21,10 @@ export default function Navbar() {
           <div className="hidden sm:flex">
             <ul className="hidden sm:flex">
               <Link href="https://www.linkedin.com/in/apiedrar/">
-                <li className="ml-5 hover:border p-4 text-xl">About Me</li>
+                <li className="ml-5 hover:border p-4 text-xl">Contact Me</li>
               </Link>
               <Link href="https://www.github.com/apiedrar/apr-portfolio-web">
-                <li className="mx-5 hover:border p-4 text-xl">Check on GitHub</li>
+                <li className="mx-5 hover:border p-4 text-xl">View on GitHub <ArrowUpRightIcon className="size-6 text-gray-500 inline" /></li>
               </Link>
             </ul>
           </div>
