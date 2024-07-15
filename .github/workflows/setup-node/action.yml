@@ -7,14 +7,14 @@ runs:
     - name: Setup Node.js ⚙️
       uses: actions/setup-node@v4
       with:
-        node-version: 20
+        node-version: "^20.14.10"
 
     - name: Cache dependencies ⚡
       id: cache_dependencies
       uses: actions/cache@v3
       with:
         path: node_modules
-        key: node-modules-${{ hashFiles('package-lock.yaml') }}
+        key: node-modules-${{ hashFiles('package-lock.json') }}
 
     - name: Install dependencies 🔧
       shell: bash
