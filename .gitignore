@@ -1,8 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-#Default README File
-/README.md
-
 # dependencies
 /node_modules
 /.pnp
@@ -20,6 +17,7 @@
 /build
 
 # misc
+README.md
 .DS_Store
 *.pem
 
