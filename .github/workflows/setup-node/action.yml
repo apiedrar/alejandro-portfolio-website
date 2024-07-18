@@ -8,7 +8,7 @@ runs:
       with:
         node-version: 20.14.10
 
-    - name: Cache dependencies ⚡
+    - name: Cache dependencies
       id: cache_dependencies
       uses: actions/cache@v3
       with:
