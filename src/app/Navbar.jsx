@@ -11,7 +11,7 @@ export default function Navbar() {
     }
 
     return(
-      <nav className="fixed w-screen h-24 mb-100px bg-black">
+      <nav className="fixed w-screen h-24 mb-100px bg-[#d6dbdcc7] dark:bg-black">
         <div className="flex justify-between items-center h-full w-full px-4">
           <Link href="/">
             <h1 className="text-lg lg:text-5xl inline">
@@ -30,7 +30,7 @@ export default function Navbar() {
           </div>
           <div onClick={handleNav} className="sm:hidden cursor-pointer pl-24"><Bars3Icon className="size-7 text-gray-500" />
           </div>
-          <div className={menuOpen ? "fixed top-0 left-0 w-screen sm:hidden h-[28%] bg-black p-10 ease-in duration-500" : "fixed top-[-100%] left-0 p-10 ease-in duration-500"}>
+          <div className={menuOpen ? "fixed top-0 left-0 w-screen sm:hidden h-[28%] bg-[#d6dbdc] p-10 ease-in duration-500 dark:bg-black" : "fixed top-[-100%] left-0 p-10 ease-in duration-500"}>
             <div className="flex w-full items-center justify-end">
               <div onClick={handleNav} className="cursor-pointer">
                 <XMarkIcon className="size-7 text-gray-500"/>
