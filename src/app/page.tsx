@@ -32,7 +32,7 @@ export default function Home() {
       <div className="mb-5 grid text-center lg:mb-0 lg:w-full lg:max-w-7xl lg:grid-cols-5 lg:text-left lg:place-items-stretch">
         <Link
           href="/roi-calculator"
-          className="rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
+          className="hidden rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
           rel="noopener noreferrer"
         >
           <h2 className="mb-3 text-2xl font-semibold">
@@ -49,7 +49,7 @@ export default function Home() {
 
         <Link
           href="/percentage-calculator"
-          className="rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
+          className="hidden rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
         >
           <h3 className="mb-2 text-2xl font-semibold">
             Percentage Calculator{" "}
@@ -65,7 +65,7 @@ export default function Home() {
 
         <Link
           href="/mockddit"
-          className="rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
+          className="hidden rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
         >
           <h3 className="mb-2 text-2xl font-semibold">
             Mockddit Phone Home{" "}
@@ -81,7 +81,7 @@ export default function Home() {
 
         <Link
           href="/toggipon"
-          className="rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
+          className="hidden rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -99,7 +99,7 @@ export default function Home() {
 
         <Link
           href="https://www.daniegan.studio"
-          className="rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
+          className="hidden rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
           target="_blank"
           rel="noopener noreferrer"
         >
