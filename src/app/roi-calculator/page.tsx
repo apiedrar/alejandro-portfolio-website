@@ -6,6 +6,7 @@ import Contribution from "./Contribution.jsx";
 import DepositFrequency from "./Frequency.jsx";
 import Percent from "./Percent.jsx";
 import Term from "./Term.jsx";
+import { quantifiedFrequency } from "./utils.js";
 import "primereact/resources/themes/mira/theme.css";
 import "primeflex/primeflex.css";
 import "./RoiCalculator.css";
@@ -20,6 +21,7 @@ export default function CalculadoraRoi() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) =>
     e.preventDefault();
+  quantifiedFrequency();
 
   return (
     <main>

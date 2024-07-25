@@ -5,7 +5,7 @@ import "primeflex/primeflex.css";
 import "./Frequency.css";
 
 export default function DepositFrequency () {
-    const [frequency, setFrequency] = useState("Mensual");
+    const [frequency, setFrequency] = useState("Monthly");
 
     return (
         <div className="radio">
@@ -13,9 +13,9 @@ export default function DepositFrequency () {
                 <RadioButton
                 inputId="years"
                 name="select-frequency"
-                value="Anual"
+                value="Annual"
                 onChange={(e) => setFrequency(e.value)}
-                checked={frequency === "Anual"}
+                checked={frequency === "Annual"}
                 />
                 <label htmlFor="years" className="radiolabel">
                 Annual
@@ -25,9 +25,9 @@ export default function DepositFrequency () {
                 <RadioButton
                 inputId="months"
                 name="select-frequency"
-                value="Mensual"
+                value="Monthly"
                 onChange={(e) => setFrequency(e.value)}
-                checked={frequency === "Mensual"}
+                checked={frequency === "Monthly"}
                 />
                 <label htmlFor="months" className="radiolabel">
                 Monthly
@@ -37,9 +37,9 @@ export default function DepositFrequency () {
                 <RadioButton
                 inputId="weeks"
                 name="select-frequency"
-                value="Semanal"
+                value="Weekly"
                 onChange={(e) => setFrequency(e.value)}
-                checked={frequency === "Semanal"}
+                checked={frequency === "Weekly"}
                 />
                 <label htmlFor="weeks" className="radiolabel">
                 Weekly
@@ -49,9 +49,9 @@ export default function DepositFrequency () {
                 <RadioButton
                 inputId="days"
                 name="select-frequency"
-                value="Diario"
+                value="Daily"
                 onChange={(e) => setFrequency(e.value)}
-                checked={frequency === "Diario"}
+                checked={frequency === "Daily"}
                 />
                 <label htmlFor="days" className="radiolabel">
                 Daily
