@@ -20,10 +20,10 @@ export default function Navbar() {
           </Link>
           <div className="hidden sm:flex">
             <ul className="hidden sm:flex">
-              <Link href="https://www.linkedin.com/in/apiedrar/">
+              <Link href="https://www.linkedin.com/in/apiedrar/" target="_blank">
                 <li className="ml-5 hover:border p-4 text-xl">Contact Me</li>
               </Link>
-              <Link href="https://www.github.com/apiedrar/apr-portfolio-web">
+              <Link href="https://www.github.com/apiedrar/apr-portfolio-web" target="_blank">
                 <li className="mx-5 hover:border p-4 text-xl">View on GitHub <ArrowUpRightIcon className="size-6 inline" /></li>
               </Link>
             </ul>
@@ -38,11 +38,11 @@ export default function Navbar() {
             </div>
             <div className="flex-col py-4">
                 <ul>
-              <Link href="https://www.x.com/apiedrar/">
-                <li className="py-4 cursor-pointer">About Me</li>
+              <Link href="https://www.linkedin.com/in/apiedrar/" target="_blank">
+                <li className="py-4 cursor-pointer">Contact Me</li>
               </Link>
-              <Link href="https://www.github.com/apiedrar/apr-portfolio-web">
-                <li className="py-4 cursor-pointer">Check on GitHub</li>
+              <Link href="https://www.github.com/apiedrar/alejandro-portfolio-website" target="_blank">
+                <li className="py-4 cursor-pointer">View on GitHub <ArrowUpRightIcon className="size-6 inline" /></li>
                 </Link>
                 </ul>
             </div>
