@@ -1,11 +1,9 @@
-import { useState } from "react";
 import { Slider } from "primereact/slider";
 import "primereact/resources/themes/mira/theme.css";
 import "primeflex/primeflex.css";
 import "./Term.css";
 
-export default function Term() {
-    const [term, setTerm] = useState(5);
+export default function Term({term, setTerm}) {
     const isPlural = term > 1 ? "years" : "year";
 
     return (

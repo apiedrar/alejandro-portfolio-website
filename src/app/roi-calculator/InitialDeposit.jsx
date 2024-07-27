@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { InputNumber } from "primereact/inputnumber";
 import "primereact/resources/themes/mira/theme.css";
 import "primeflex/primeflex.css";
 
-export default function InitialDeposit () {
-    const [initialDeposit, setInitialDeposit] = useState(null);
+export default function InitialDeposit ({initialDeposit, setInitialDeposit}) {
 
     return (<InputNumber
         placeholder="US$ 1,200"

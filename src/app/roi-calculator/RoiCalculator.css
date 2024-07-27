@@ -97,10 +97,6 @@ form {
   border-color: #7130a3;
 }
 
-.wololo {
-  align-items: center;
-}
-
 .bouton {
   height: 4rem;
   width: 15rem;
@@ -172,6 +168,9 @@ form {
   }
   .radio {
     align-self: center;
+  }
+  .average-return {
+    margin-left: 6%;
   }
   .bouton {
     padding: none;
