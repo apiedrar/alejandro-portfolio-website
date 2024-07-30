@@ -1,8 +1,8 @@
 const calculateInvestedAmount = (
-  initialDeposit,
-  contribution,
+  initialDeposit = 1200,
+  contribution = 200,
   frequency,
-  term
+  term = 5
 ) => {
   const frequencyMap = {
     Daily: 365,
@@ -20,7 +20,7 @@ const calculateInvestedAmount = (
   return investedAmounts;
 };
 
-const calculateReturnAmount = (investedAmounts, percent) => {
+const calculateReturnAmount = (investedAmounts, percent = 15) => {
   const annualReturnRate = percent / 100;
 
   return investedAmounts.map((amount) => {
@@ -29,7 +29,7 @@ const calculateReturnAmount = (investedAmounts, percent) => {
   return returnAmounts;
 };
 
-const calculateReinvestedReturn = (returnAmounts, percent) => {
+const calculateReinvestedReturn = (returnAmounts, percent = 15) => {
   const annualReturnRate = percent / 100;
 
   let reinvestedReturns = [];
@@ -43,24 +43,20 @@ const calculateReinvestedReturn = (returnAmounts, percent) => {
 };
 
 const handleSubmit = (formData) => {
-  let { initialDeposit, contribution, frequency, term, percent } = formData;
+  const { initialDeposit, contribution, frequency, term, percent } = formData;
 
-  const investedAmounts = calculateInvestedAmount(
-    (initialDeposit = 1200),
-    (contribution = 200),
+  let investedAmounts = calculateInvestedAmount(
+    initialDeposit,
+    contribution,
     frequency,
-    (term = 5)
+    term
   );
-  const returnAmounts = calculateReturnAmount(investedAmounts, (percent = 15));
-  const reinvestedReturns = calculateReinvestedReturn(
-    returnAmounts,
-    (percent = 15)
-  );
+  let returnAmounts = calculateReturnAmount(investedAmounts, percent);
+  let reinvestedReturns = calculateReinvestedReturn(returnAmounts, percent);
 
   const graphData = [];
   for (let i = 0; i < term; i++) {
-    graphData.push;
-    ({
+    graphData.push({
       year: i + 1,
       investedAmount: investedAmounts[i],
       returnAmount: returnAmounts[i],
@@ -69,36 +65,6 @@ const handleSubmit = (formData) => {
   }
   console.log(graphData);
 };
-
-/* const handleSubmit = (formData) => {
-  const { initialDeposit, contribution, frequency, term, percent } = formData;
-
-  const quantifiedFrequency = () => {
-    if (frequency === "Annual") {
-      return 1;
-    } else if (frequency === "Monthly") {
-      return 12;
-    } else if (frequency === "Weekly") {
-      return 52;
-    } else if (frequency === "Daily") {
-      return 365;
-    } else {
-      return "Sorry, you have to define a frequency for your deposits";
-    }
-  };
-
-  const totalInvestment = () => {
-    let contributionTimesFrequency = contribution * quantifiedFrequency;
-    let totalContribution = Array.from(
-      { length: term },
-      () => contributionTimesFrequency
-    );
-    console.log(totalContribution);
-  };
-
-  return totalInvestment();
-};
- */
 
 export {
   calculateInvestedAmount,
