@@ -29,12 +29,10 @@ export default function RoiCalculator() {
     currency: "USD",
     maximumFractionDigits: 0,
   });
+  let roi = 20244;
 
-  const submition = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const formData = { initialDeposit, contribution, frequency, term, percent };
-
     const investedAmounts = calculateInvestedAmount(
       initialDeposit,
       contribution,
@@ -48,18 +46,20 @@ export default function RoiCalculator() {
       reinvestedReturns
     );
 
-    handleSubmit({ formData });
+    console.log("Invested Amounts:", investedAmounts);
+    console.log("Return Amounts:", returnAmounts);
+    console.log("Reinvested Returns:", reinvestedReturns);
+    console.log("Future Balance:", futureBalance);
 
-    return futureBalance;
+    let roi = futureBalance;
   };
-  let roi = 20244;
 
   return (
     <main>
       <Navbar />
       <section className="calculator-top-container">
         <div className="roi-calculus">
-          <form onSubmit={submition}>
+          <form onSubmit={handleSubmit}>
             <div className="bottom-spacing initial-deposit">
               <label
                 htmlFor="initial-deposit"
