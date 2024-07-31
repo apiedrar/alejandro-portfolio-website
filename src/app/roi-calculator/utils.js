@@ -1,8 +1,8 @@
 const calculateInvestedAmount = (
-  initialDeposit = 1200,
-  contribution = 200,
+  initialDeposit,
+  contribution,
   frequency,
-  term = 5
+  term
 ) => {
   const frequencyMap = {
     Daily: 365,
@@ -20,29 +20,39 @@ const calculateInvestedAmount = (
   return investedAmounts;
 };
 
-const calculateReturnAmount = (investedAmounts, percent = 15) => {
+const calculateReturnAmount = (investedAmounts, percent) => {
   const annualReturnRate = percent / 100;
 
   return investedAmounts.map((amount) => {
     return amount * annualReturnRate;
   });
-  return returnAmounts;
 };
 
-const calculateReinvestedReturn = (returnAmounts, percent = 15) => {
+const calculateReinvestedReturn = (returnAmounts, percent) => {
   const annualReturnRate = percent / 100;
-
   let reinvestedReturns = [];
   let totalReinvested = 0;
 
-  returnAmounts.forEach((returnAmount, i) => {
+  returnAmounts.forEach((returnAmount) => {
     totalReinvested += returnAmount;
     reinvestedReturns.push(totalReinvested * annualReturnRate);
   });
   return reinvestedReturns;
 };
 
-const handleSubmit = (formData) => {
+const calculateFutureBalance = (investedAmounts, reinvestedReturns) => {
+  const totalInvested = investedAmounts.reduce(
+    (acc, { investedAmount }) => acc + investedAmount,
+    0
+  );
+  const totalReinvestedReturns = reinvestedReturns.reduce(
+    (acc, { reinvestedReturn }) => acc + reinvestedReturn,
+    0
+  );
+  return totalInvested + totalReinvestedReturns;
+};
+
+const handleSubmit = ({ formData }) => {
   const { initialDeposit, contribution, frequency, term, percent } = formData;
 
   let investedAmounts = calculateInvestedAmount(
@@ -63,12 +73,13 @@ const handleSubmit = (formData) => {
       reinvestedReturn: reinvestedReturns[i],
     });
   }
-  console.log(graphData);
+  return graphData;
 };
 
 export {
   calculateInvestedAmount,
   calculateReturnAmount,
   calculateReinvestedReturn,
+  calculateFutureBalance,
   handleSubmit,
 };

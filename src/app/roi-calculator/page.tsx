@@ -7,7 +7,13 @@ import Contribution from "./Contribution.jsx";
 import DepositFrequency from "./Frequency.jsx";
 import Percent from "./Percent.jsx";
 import Term from "./Term.jsx";
-import { handleSubmit } from "./utils.js";
+import {
+  handleSubmit,
+  calculateInvestedAmount,
+  calculateReturnAmount,
+  calculateReinvestedReturn,
+  calculateFutureBalance,
+} from "./utils.js";
 import "primereact/resources/themes/mira/theme.css";
 import "primeflex/primeflex.css";
 import "./RoiCalculator.css";
@@ -23,15 +29,30 @@ export default function RoiCalculator() {
     currency: "USD",
     maximumFractionDigits: 0,
   });
-  let roi = 51805;
 
   const submition = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = { initialDeposit, contribution, frequency, term, percent };
 
-    handleSubmit(formData);
+    const investedAmounts = calculateInvestedAmount(
+      initialDeposit,
+      contribution,
+      frequency,
+      term
+    );
+    const returnAmounts = calculateReturnAmount(investedAmounts, percent);
+    const reinvestedReturns = calculateReinvestedReturn(returnAmounts, percent);
+    const futureBalance = calculateFutureBalance(
+      investedAmounts,
+      reinvestedReturns
+    );
+
+    handleSubmit({ formData });
+
+    return futureBalance;
   };
+  let roi = 20244;
 
   return (
     <main>

@@ -48,10 +48,10 @@ form {
 }
 
 .toplabel {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
   letter-spacing: 3.2px;
-  color: #7130a3;
+  color: #2563eb;
 }
 
 .p-inputnumber-input {
@@ -63,7 +63,7 @@ form {
   letter-spacing: 0.75px;
   border-radius: 30px;
   border: none;
-  color: #767676;
+  color: #5c5c5c;
 }
 
 .p-inputnumber-input:valid {
@@ -90,17 +90,17 @@ form {
 
 .p-slider-range {
   border-radius: 22px;
-  background-color: #a3309c;
+  background-color: #3b82f6;
 }
 
 .p-slider-handle {
-  border-color: #7130a3;
+  border-color: #3b82f6;
 }
 
 .bouton {
   height: 4rem;
   width: 15rem;
-  background-color: #a3309c;
+  background-color: #3b82f6;
   color: #ffffff;
   border: none;
   border-radius: 30px;
@@ -134,17 +134,17 @@ form {
   font-size: 78px;
   font-weight: 600;
   border-bottom-style: dashed;
-  border-bottom-color: #a3309c;
+  border-bottom-color: #3b82f6;
   border-bottom-width: 3px;
   line-height: 103px;
-  color: #a3309c;
+  color: #3b82f6;
 }
 
 .graph {
   width: 800px;
   height: 432px;
   border-radius: 22px;
-  background-color: #7130a3;
+  background-color: #2563eb;
 }
 
 @media (max-width: 1024px) {
