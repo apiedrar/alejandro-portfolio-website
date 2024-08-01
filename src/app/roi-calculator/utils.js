@@ -1,3 +1,20 @@
+import { addDays, addWeeks, addMonths, addYears, startOfDay } from "date-fns";
+
+const calculateStartDate = (frequency) => {
+  const today = startOfDay(new Date());
+
+  switch (frequency) {
+    case "Daily":
+      return addDays(today, 1);
+    case "Weekly":
+      return addWeeks(today, 1);
+    case "Monthly":
+      return addMonths(today, 1);
+    case "Annual":
+      return addYears(today, 1);
+  }
+};
+
 const calculateInvestedAmount = (
   initialDeposit,
   contribution,
@@ -42,11 +59,11 @@ const calculateReinvestedReturn = (returnAmounts, percent) => {
 
 const calculateFutureBalance = (investedAmounts, reinvestedReturns) => {
   const totalInvested = investedAmounts.reduce(
-    (acc, { investedAmount }) => acc + investedAmount,
+    (acc, investedAmount) => acc + investedAmount,
     0
   );
   const totalReinvestedReturns = reinvestedReturns.reduce(
-    (acc, { reinvestedReturn }) => acc + reinvestedReturn,
+    (acc, reinvestedReturn) => acc + reinvestedReturn,
     0
   );
   return totalInvested + totalReinvestedReturns;
@@ -55,14 +72,23 @@ const calculateFutureBalance = (investedAmounts, reinvestedReturns) => {
 const handleSubmit = ({ formData }) => {
   const { initialDeposit, contribution, frequency, term, percent } = formData;
 
-  let investedAmounts = calculateInvestedAmount(
+  const investedAmounts = calculateInvestedAmount(
     initialDeposit,
     contribution,
     frequency,
     term
   );
-  let returnAmounts = calculateReturnAmount(investedAmounts, percent);
-  let reinvestedReturns = calculateReinvestedReturn(returnAmounts, percent);
+  const returnAmounts = calculateReturnAmount(investedAmounts, percent);
+  const reinvestedReturns = calculateReinvestedReturn(returnAmounts, percent);
+  const futureBalance = calculateFutureBalance(
+    investedAmounts,
+    reinvestedReturns
+  );
+
+  console.log("Invested Amounts:", investedAmounts);
+  console.log("Return Amounts:", returnAmounts);
+  console.log("Reinvested Returns:", reinvestedReturns);
+  console.log("Future Balance:", futureBalance);
 
   const graphData = [];
   for (let i = 0; i < term; i++) {

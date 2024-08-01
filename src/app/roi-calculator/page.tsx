@@ -7,13 +7,7 @@ import Contribution from "./Contribution.jsx";
 import DepositFrequency from "./Frequency.jsx";
 import Percent from "./Percent.jsx";
 import Term from "./Term.jsx";
-import {
-  handleSubmit,
-  calculateInvestedAmount,
-  calculateReturnAmount,
-  calculateReinvestedReturn,
-  calculateFutureBalance,
-} from "./utils.js";
+import { handleSubmit } from "./utils.js";
 import "primereact/resources/themes/mira/theme.css";
 import "primeflex/primeflex.css";
 import "./RoiCalculator.css";
@@ -31,27 +25,12 @@ export default function RoiCalculator() {
   });
   let roi = 20244;
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const submition = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const investedAmounts = calculateInvestedAmount(
-      initialDeposit,
-      contribution,
-      frequency,
-      term
-    );
-    const returnAmounts = calculateReturnAmount(investedAmounts, percent);
-    const reinvestedReturns = calculateReinvestedReturn(returnAmounts, percent);
-    const futureBalance = calculateFutureBalance(
-      investedAmounts,
-      reinvestedReturns
-    );
 
-    console.log("Invested Amounts:", investedAmounts);
-    console.log("Return Amounts:", returnAmounts);
-    console.log("Reinvested Returns:", reinvestedReturns);
-    console.log("Future Balance:", futureBalance);
+    const formData = { initialDeposit, contribution, frequency, term, percent };
 
-    let roi = futureBalance;
+    handleSubmit({ formData });
   };
 
   return (
@@ -59,7 +38,7 @@ export default function RoiCalculator() {
       <Navbar />
       <section className="calculator-top-container">
         <div className="roi-calculus">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={submition}>
             <div className="bottom-spacing initial-deposit">
               <label
                 htmlFor="initial-deposit"
