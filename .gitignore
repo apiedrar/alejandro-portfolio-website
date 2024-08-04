@@ -17,9 +17,9 @@
 /build
 
 # misc
-README.md
 .DS_Store
 *.pem
+edits.js
 
 # debug
 npm-debug.log*

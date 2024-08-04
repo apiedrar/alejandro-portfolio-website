@@ -18,19 +18,27 @@ export default function RoiCalculator() {
   const [frequency, setFrequency] = useState("Monthly");
   const [term, setTerm] = useState(5);
   const [percent, setPercent] = useState(null);
+  const [graphData, setGraphData] = useState([
+    [2024, 2025, 2026, 2027, 2028, 2029],
+    [1200, 3600, 6000, 8400, 10800, 13200],
+    [0, 365, 1174, 2500, 4424, 7044],
+  ]);
+  const [futureBalance, setFutureBalance] = useState(2244);
   const usDollar = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
     maximumFractionDigits: 0,
   });
-  let roi = 20244;
 
   const submition = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = { initialDeposit, contribution, frequency, term, percent };
 
-    handleSubmit({ formData });
+    const { graphData, futureBalance } = handleSubmit({ formData });
+
+    setGraphData(graphData);
+    setFutureBalance(futureBalance);
   };
 
   return (
@@ -93,7 +101,7 @@ export default function RoiCalculator() {
                 POTENTIAL FUTURE BALANCE:
               </label>
               <div className="final-result" id="return-of-investment">
-                US{usDollar.format(roi)}
+                US{usDollar.format(futureBalance)}
               </div>
               <div className="graph"></div>
             </div>

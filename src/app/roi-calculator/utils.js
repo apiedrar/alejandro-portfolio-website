@@ -31,81 +31,131 @@ const calculateInvestedAmount = (
   const contributionSpans = frequencyMap[frequency];
   const annualContribution = contribution * contributionSpans;
 
-  const investedAmounts = new Array(term).fill(0).map((_, i) => {
-    return initialDeposit + annualContribution * i;
-  });
+  const investedAmounts = [];
+  for (let i = 0; i <= term; i++) {
+    investedAmounts.push(initialDeposit + annualContribution * i);
+  }
   return investedAmounts;
 };
 
-const calculateReturnAmount = (investedAmounts, percent) => {
+const calculateReturnAmount = (
+  initialDeposit,
+  contribution,
+  frequency,
+  term,
+  percent
+) => {
+  const frequencyMap = {
+    Daily: 365,
+    Weekly: 52,
+    Monthly: 12,
+    Annual: 1,
+  };
+
+  const contributionSpans = frequencyMap[frequency];
+  const annualContribution = contribution * contributionSpans;
   const annualReturnRate = percent / 100;
 
-  return investedAmounts.map((amount) => {
-    return amount * annualReturnRate;
-  });
+  let totalInvested = initialDeposit;
+  let returnAmounts = [];
+
+  for (let i = 0; i <= term; i++) {
+    if (i > 0) {
+      const previousAmount = totalInvested + returnAmounts[i - 1];
+      returnAmounts.push(Math.round(previousAmount * annualReturnRate));
+    } else {
+      returnAmounts.push(0); // No return in the initial year
+    }
+    totalInvested += annualContribution;
+  }
+
+  return returnAmounts;
 };
 
-const calculateReinvestedReturn = (returnAmounts, percent) => {
-  const annualReturnRate = percent / 100;
-  let reinvestedReturns = [];
-  let totalReinvested = 0;
-
-  returnAmounts.forEach((returnAmount) => {
-    totalReinvested += returnAmount;
-    reinvestedReturns.push(totalReinvested * annualReturnRate);
-  });
-  return reinvestedReturns;
-};
-
-const calculateFutureBalance = (investedAmounts, reinvestedReturns) => {
-  const totalInvested = investedAmounts.reduce(
-    (acc, investedAmount) => acc + investedAmount,
-    0
-  );
-  const totalReinvestedReturns = reinvestedReturns.reduce(
-    (acc, reinvestedReturn) => acc + reinvestedReturn,
-    0
-  );
-  return totalInvested + totalReinvestedReturns;
-};
-
-const handleSubmit = ({ formData }) => {
-  const { initialDeposit, contribution, frequency, term, percent } = formData;
-
+const calculateFutureBalance = (
+  initialDeposit,
+  contribution,
+  frequency,
+  term,
+  percent
+) => {
   const investedAmounts = calculateInvestedAmount(
     initialDeposit,
     contribution,
     frequency,
     term
   );
-  const returnAmounts = calculateReturnAmount(investedAmounts, percent);
-  const reinvestedReturns = calculateReinvestedReturn(returnAmounts, percent);
+  const returnAmounts = calculateReturnAmount(
+    initialDeposit,
+    contribution,
+    frequency,
+    term,
+    percent
+  );
+
+  let totalBalance = 0;
+  for (let i = 0; i <= term; i++) {
+    totalBalance += investedAmounts[i] + returnAmounts[i];
+  }
+  return Math.round(totalBalance);
+};
+
+const handleSubmit = ({ formData }) => {
+  const { initialDeposit, contribution, frequency, term, percent } = formData;
+
+  const frequencyMap = {
+    Daily: 365,
+    Weekly: 52,
+    Monthly: 12,
+    Annual: 1,
+  };
+  const investedAmounts = calculateInvestedAmount(
+    initialDeposit,
+    contribution,
+    frequency,
+    term
+  );
+  const returnAmounts = calculateReturnAmount(
+    initialDeposit,
+    contribution,
+    frequency,
+    term,
+    percent
+  );
   const futureBalance = calculateFutureBalance(
-    investedAmounts,
-    reinvestedReturns
+    initialDeposit,
+    contribution,
+    frequency,
+    term,
+    percent
   );
 
   console.log("Invested Amounts:", investedAmounts);
   console.log("Return Amounts:", returnAmounts);
-  console.log("Reinvested Returns:", reinvestedReturns);
   console.log("Future Balance:", futureBalance);
 
-  const graphData = [];
-  for (let i = 0; i < term; i++) {
+  const graphData = [[], [], []];
+  const startYear = new Date().getFullYear();
+  let totalInvested = initialDeposit;
+
+  for (let i = 0; i <= term; i++) {
+    if (i > 0) {
+      totalInvested += returnAmounts[i - 1]; // Add previous year's return to total invested
+    }
     graphData.push({
-      year: i + 1,
-      investedAmount: investedAmounts[i],
+      year: startYear + i,
+      investedAmount:
+        totalInvested + contribution * frequencyMap[frequency] * i,
       returnAmount: returnAmounts[i],
-      reinvestedReturn: reinvestedReturns[i],
     });
   }
-  return graphData;
+
+  return { graphData, futureBalance };
 };
 
 export {
   calculateInvestedAmount,
   calculateReturnAmount,
-  calculateReinvestedReturn,
   calculateFutureBalance,
   handleSubmit,
 };
