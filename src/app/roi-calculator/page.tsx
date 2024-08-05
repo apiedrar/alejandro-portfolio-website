@@ -2,6 +2,16 @@
 import Navbar from "@/app/Navbar.jsx";
 import { useState } from "react";
 import { Button } from "primereact/button";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 import InitialDeposit from "./InitialDeposit.jsx";
 import Contribution from "./Contribution.jsx";
 import DepositFrequency from "./Frequency.jsx";
@@ -23,7 +33,7 @@ export default function RoiCalculator() {
     [1200, 3600, 6000, 8400, 10800, 13200],
     [0, 365, 1174, 2500, 4424, 7044],
   ]);
-  const [futureBalance, setFutureBalance] = useState(2244);
+  const [futureBalance, setFutureBalance] = useState(50214);
   const usDollar = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -103,7 +113,23 @@ export default function RoiCalculator() {
               <div className="final-result" id="return-of-investment">
                 US{usDollar.format(futureBalance)}
               </div>
-              <div className="graph"></div>
+              <div className="graph">
+                <ResponsiveContainer width="98%" height="95%">
+                  <BarChart data={graphData}>
+                    <CartesianGrid stroke="#c8d8fa" />
+                    <XAxis stroke="#c8d8fa" dataKey="year" />
+                    <YAxis type="number" stroke="#c8d8fa" />
+                    <Tooltip />
+                    <Legend />
+                    <Bar
+                      name="Investment"
+                      dataKey="investedAmount"
+                      fill="#c8d8fa"
+                    />
+                    <Bar name="Return" dataKey="returnAmount" fill="#779ef2" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
           </div>
         </div>
