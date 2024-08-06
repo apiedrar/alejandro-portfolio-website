@@ -22,11 +22,11 @@ export default function Home() {
         />
       </div>
       <p className="text-md max-w-[30ch] my-24">
-        Below, I'll be publishing examples of my work. Feel free to navigate
-        through the site, test and make good use of everything you find
+        Below, I`&apos;`ll be publishing examples of my work. Feel free to
+        navigate through the site, test and make good use of everything you find
         interesting.
         <br />
-        You're my guest of honor ✨
+        You`&apos;`re my guest of honor ✨
       </p>
 
       <div className="mb-5 grid text-center lg:mb-0 lg:w-full lg:max-w-7xl lg:grid-cols-5 lg:text-left lg:place-items-stretch">
@@ -74,8 +74,8 @@ export default function Home() {
             </span>
           </h3>
           <p className="mt-2 max-w-[30ch] text-sm">
-            Built using React and Redux, and integrating real data from Reddit's
-            API.
+            Built using React and Redux, and integrating real data from
+            Reddit`&apos;`s API.
           </p>
         </Link>
 
@@ -110,7 +110,8 @@ export default function Home() {
             </span>
           </h3>
           <p className="mt-2 max-w-[30ch] text-balance text-sm">
-            Take a look at the latest collaboration I'm most proud of (To Date).
+            Take a look at the latest collaboration I`&apos;`m most proud of (To
+            Date).
           </p>
         </Link>
       </div>
