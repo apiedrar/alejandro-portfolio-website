@@ -28,7 +28,7 @@ export default function RoiCalculator() {
   const [frequency, setFrequency] = useState("Monthly");
   const [term, setTerm] = useState(5);
   const [percent, setPercent] = useState(null);
-  const [graphData, setGraphData] = useState([[], [], []]);
+  const [graphData, setGraphData] = useState<Array<any>>([]);
   const [futureBalance, setFutureBalance] = useState(50214);
   const usDollar = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -124,7 +124,7 @@ export default function RoiCalculator() {
                     <Bar
                       name="Return"
                       dataKey="returnAmount"
-                      fill="#779ef2"
+                      fill="#92b1f5"
                       stackId="a"
                     />
                     <CartesianGrid stroke="#c8d8fa" vertical={false} />
@@ -134,6 +134,7 @@ export default function RoiCalculator() {
                     <Legend />
                   </BarChart>
                 </ResponsiveContainer>
+                <p></p>
               </div>
             </div>
           </div>

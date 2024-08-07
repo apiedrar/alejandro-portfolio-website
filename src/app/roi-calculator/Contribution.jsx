@@ -13,7 +13,7 @@ export default function Contribution ({contribution, setContribution}) {
             mode="decimal"
             prefix="US$ "
             locale="en-us"
-            min={10}
+            min={1}
         />
     )
 }

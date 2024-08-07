@@ -13,8 +13,7 @@ export default function Percent({percent, setPercent}) {
               value={percent}
               onValueChange={(e) => setPercent(e.value)}
               mode="decimal"
-              min={10}
-              max={40}
+              min={1}
             />
           </div>
     );
