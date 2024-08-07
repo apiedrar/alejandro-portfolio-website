@@ -22,11 +22,11 @@ export default function Home() {
         />
       </div>
       <p className="text-md max-w-[30ch] my-24">
-        Below, I'll be publishing examples of my work. Feel free to navigate
+        Below, I&#39;ll be publishing examples of my work. Feel free to navigate
         through the site, test and make good use of everything you find
         interesting.
         <br />
-        You're my guest of honor ✨
+        You&#39;re my guest of honor ✨
       </p>
 
       <div className="mb-5 grid text-center lg:mb-0 lg:w-full lg:max-w-7xl lg:grid-cols-5 lg:text-left lg:place-items-stretch">
@@ -36,20 +36,20 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2 className="mb-3 text-2xl font-semibold">
-            Investment ROI Calculator{" "}
+            ROI Calculator{" "}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
           </h2>
           <p className="m-0 max-w-[90%] text-sm">
-            Compound Interest Calculator, with a Graphic and built using Next.js
-            and Primereact.
+            Compound Interest Calculator, with a chart and built using component
+            based architecture.
           </p>
         </Link>
 
         <Link
           href="/percentage-calculator"
-          className="rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
+          className="hidden rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
         >
           <h3 className="mb-2 text-2xl font-semibold">
             Percentage Calculator{" "}
@@ -65,7 +65,7 @@ export default function Home() {
 
         <Link
           href="/mockddit"
-          className="rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
+          className="hidden rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
         >
           <h3 className="mb-2 text-2xl font-semibold">
             Mockddit Phone Home{" "}
@@ -74,14 +74,14 @@ export default function Home() {
             </span>
           </h3>
           <p className="mt-2 max-w-[30ch] text-sm">
-            Built using React and Redux, and integrating real data from Reddit's
-            API.
+            Built using React and Redux, and integrating real data from
+            Reddit&#39;s API.
           </p>
         </Link>
 
         <Link
           href="/toggipon"
-          className="rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
+          className="hidden rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -99,7 +99,7 @@ export default function Home() {
 
         <Link
           href="https://www.daniegan.studio"
-          className="rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
+          className="hidden rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -110,7 +110,8 @@ export default function Home() {
             </span>
           </h3>
           <p className="mt-2 max-w-[30ch] text-balance text-sm">
-            Take a look at the latest collaboration I'm most proud of (To Date).
+            Take a look at the latest collaboration I&#39;m most proud of (To
+            Date).
           </p>
         </Link>
       </div>

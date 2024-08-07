@@ -134,7 +134,7 @@ const handleSubmit = ({ formData }) => {
   console.log("Return Amounts:", returnAmounts);
   console.log("Future Balance:", futureBalance);
 
-  const graphData = [[], [], []];
+  const graphData = [];
   const startYear = new Date().getFullYear();
   let totalInvested = initialDeposit;
 

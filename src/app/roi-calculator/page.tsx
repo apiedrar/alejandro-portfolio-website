@@ -28,11 +28,7 @@ export default function RoiCalculator() {
   const [frequency, setFrequency] = useState("Monthly");
   const [term, setTerm] = useState(5);
   const [percent, setPercent] = useState(null);
-  const [graphData, setGraphData] = useState([
-    [2024, 2025, 2026, 2027, 2028, 2029],
-    [1200, 3600, 6000, 8400, 10800, 13200],
-    [0, 365, 1174, 2500, 4424, 7044],
-  ]);
+  const [graphData, setGraphData] = useState([[], [], []]);
   const [futureBalance, setFutureBalance] = useState(50214);
   const usDollar = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -114,19 +110,28 @@ export default function RoiCalculator() {
                 US{usDollar.format(futureBalance)}
               </div>
               <div className="graph">
-                <ResponsiveContainer width="98%" height="95%">
-                  <BarChart data={graphData}>
-                    <CartesianGrid stroke="#c8d8fa" />
-                    <XAxis stroke="#c8d8fa" dataKey="year" />
-                    <YAxis type="number" stroke="#c8d8fa" />
-                    <Tooltip />
-                    <Legend />
+                <ResponsiveContainer width="98%" height="90%">
+                  <BarChart
+                    data={graphData}
+                    margin={{ top: 50, right: 15, bottom: 0, left: 15 }}
+                  >
                     <Bar
                       name="Investment"
                       dataKey="investedAmount"
                       fill="#c8d8fa"
+                      stackId="a"
                     />
-                    <Bar name="Return" dataKey="returnAmount" fill="#779ef2" />
+                    <Bar
+                      name="Return"
+                      dataKey="returnAmount"
+                      fill="#779ef2"
+                      stackId="a"
+                    />
+                    <CartesianGrid stroke="#c8d8fa" vertical={false} />
+                    <XAxis stroke="#c8d8fa" dataKey="year" />
+                    <YAxis type="number" stroke="#c8d8fa" />
+                    <Tooltip />
+                    <Legend />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
