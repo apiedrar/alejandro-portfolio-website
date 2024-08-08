@@ -37,7 +37,7 @@ export default function Home() {
       <div className="mb-5 grid text-center max-w-[60ch] lg:text-left">
         <Link
           href="/roi-calculator"
-          className="hidden rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
+          className="rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
           rel="noopener noreferrer"
         >
           <h2 className="mb-3 text-2xl font-semibold">
