@@ -47,8 +47,9 @@ export default function Home() {
             </span>
           </h2>
           <p className="m-0 max-w-[90%] text-sm">
-            Compound Interest Calculator, with a chart and built using component
-            based architecture.
+            Enter the amounts and simulate how the interest would compound over
+            time by periodically reinvesting your returns as well as the money
+            you&#39;re investing.
           </p>
         </Link>
       </div>
