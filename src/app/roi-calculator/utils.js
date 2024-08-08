@@ -132,17 +132,17 @@ const handleSubmit = ({ formData }) => {
 
   const graphData = [];
   const startYear = new Date().getFullYear();
-  let totalInvested = initialDeposit;
+  let totalReturns = 0;
 
   for (let i = 0; i <= term; i++) {
     if (i > 0) {
-      totalInvested += returnAmounts[i - 1]; // Add previous year's return to total invested
+      totalReturns += returnAmounts[i - 1]; // Add previous year's return to total invested
     }
     graphData.push({
       year: startYear + i,
       investedAmount:
-        totalInvested + contribution * frequencyMap[frequency] * i,
-      returnAmount: returnAmounts[i],
+        initialDeposit + contribution * frequencyMap[frequency] * i,
+      returnAmount: totalReturns + returnAmounts[i],
     });
   }
 
