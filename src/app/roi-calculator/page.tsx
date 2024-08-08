@@ -130,7 +130,7 @@ export default function RoiCalculator() {
                     <CartesianGrid stroke="#c8d8fa" vertical={false} />
                     <XAxis stroke="#c8d8fa" dataKey="year" />
                     <YAxis type="number" stroke="#c8d8fa" />
-                    <Tooltip cursor={false} />
+                    <Tooltip cursor={{ stroke: "blue", opacity: "20%" }} />
                     <Legend />
                   </BarChart>
                 </ResponsiveContainer>
@@ -142,15 +142,15 @@ export default function RoiCalculator() {
                   <p>
                     As you can see, the bars represent both your investment and
                     the returns generated.
-                    <br /> You may be wondering why your returns look so small,
-                    right&#63; Well, that is because the idea of interest
-                    compounding over time means consistently reinvesting your
-                    returns along with your Initial Deposit and your
-                    Contributions. To put it simply&#58; if you invest according
-                    to the values I&#39;ve left for you as placeholders, at the
-                    end of the term you&#39;ll have payed US&#36; 13,200.
-                    Substract that from your Potential Future Balance and you'll
-                    have your Potential Total Return of Investment.
+                    <br /> Do you notice how your returns drastically increase
+                    every year&#63;
+                    <br /> Well, that is because the idea of interest
+                    compounding over time means periodically reinvesting the
+                    Returns On Investment along with Initial Deposit and
+                    periodic Contributions.
+                    <br /> To my financially expert public&#58; these returns
+                    are calculated up front based off of your or the
+                    client&#39;s guarantee to make the contributions.
                   </p>
                 ) : (
                   <p>
