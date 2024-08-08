@@ -7,7 +7,7 @@ export default function Percent({percent, setPercent}) {
     return (
         <div>
             <InputNumber
-              placeholder="15%"
+              placeholder="Enter Amount"
               id="percent"
               suffix="%"
               value={percent}

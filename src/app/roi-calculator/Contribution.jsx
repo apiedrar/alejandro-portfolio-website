@@ -6,7 +6,7 @@ export default function Contribution ({contribution, setContribution}) {
 
     return (
         <InputNumber
-            placeholder="US$ 200"
+            placeholder="Enter Amount"
             id="contributions"
             value={contribution}
             onValueChange={(e) => setContribution(e.value)}

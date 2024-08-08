@@ -118,55 +118,24 @@ export default function RoiCalculator() {
                     <Bar
                       name="Investment"
                       dataKey="investedAmount"
-                      fill="#c8d8fa"
+                      fill="#cabfdb"
                       stackId="a"
                     />
                     <Bar
                       name="Return"
                       dataKey="returnAmount"
-                      fill="#92b1f5"
+                      fill="#9680b8"
                       stackId="a"
                     />
-                    <CartesianGrid stroke="#c8d8fa" vertical={false} />
-                    <XAxis stroke="#c8d8fa" dataKey="year" />
-                    <YAxis type="number" stroke="#c8d8fa" />
-                    <Tooltip cursor={{ stroke: "blue", opacity: "20%" }} />
+                    <CartesianGrid stroke="#cabfdb" vertical={false} />
+                    <XAxis stroke="#cabfdb" dataKey="year" />
+                    <YAxis type="number" stroke="#cabfdb" />
+                    <Tooltip cursor={{ stroke: "#cabfdb", opacity: "20%" }} />
                     <Legend />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
             </div>
-            <section className="legend-container">
-              <div className="legend">
-                {futureBalance !== 0 ? (
-                  <p>
-                    As you can see, the bars represent both your investment and
-                    the returns generated.
-                    <br /> Do you notice how your returns drastically increase
-                    every year&#63;
-                    <br /> Well, that is because the idea of interest
-                    compounding over time means periodically reinvesting the
-                    Returns On Investment along with Initial Deposit and
-                    periodic Contributions.
-                    <br /> To my financially expert public&#58; these returns
-                    are calculated up front based off of your or the
-                    client&#39;s guarantee to make the contributions.
-                  </p>
-                ) : (
-                  <p>
-                    Welcome&#33; This is a Compound Interest Calculator.
-                    <br />
-                    To start using it, enter sums in Initial Deposit&#39;s and
-                    Contribution&#39;s inputs; and a quantity in the Average
-                    Annual Return input at the bottom. You may modify the
-                    Contribution frequency and the Term of Investment, or leave
-                    them as they&#39;re set by default.
-                    <br />
-                    When you&#39;re done, click the button or hit enter.
-                  </p>
-                )}
-              </div>
-            </section>
           </div>
         </div>
       </section>

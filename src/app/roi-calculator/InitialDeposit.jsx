@@ -5,7 +5,7 @@ import "primeflex/primeflex.css";
 export default function InitialDeposit ({initialDeposit, setInitialDeposit}) {
 
     return (<InputNumber
-        placeholder="US$ 1,200"
+        placeholder="Enter Amount"
         id="initial-deposit"
         value={initialDeposit}
         onValueChange={(e) => setInitialDeposit(e.value)}
