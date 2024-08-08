@@ -29,7 +29,7 @@ export default function RoiCalculator() {
   const [term, setTerm] = useState(5);
   const [percent, setPercent] = useState(null);
   const [graphData, setGraphData] = useState<Array<any>>([]);
-  const [futureBalance, setFutureBalance] = useState(50214);
+  const [futureBalance, setFutureBalance] = useState(0);
   const usDollar = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -130,13 +130,43 @@ export default function RoiCalculator() {
                     <CartesianGrid stroke="#c8d8fa" vertical={false} />
                     <XAxis stroke="#c8d8fa" dataKey="year" />
                     <YAxis type="number" stroke="#c8d8fa" />
-                    <Tooltip />
+                    <Tooltip cursor={false} />
                     <Legend />
                   </BarChart>
                 </ResponsiveContainer>
-                <p></p>
               </div>
             </div>
+            <section className="legend-container">
+              <div className="legend">
+                {futureBalance !== 0 ? (
+                  <p>
+                    As you can see, the bars represent both your investment and
+                    the returns generated.
+                    <br /> You may be wondering why your returns look so small,
+                    right&#63; Well, that is because the idea of interest
+                    compounding over time means consistently reinvesting your
+                    returns along with your Initial Deposit and your
+                    Contributions. To put it simply&#58; if you invest according
+                    to the values I&#39;ve left for you as placeholders, at the
+                    end of the term you&#39;ll have payed US&#36; 13,200.
+                    Substract that from your Potential Future Balance and you'll
+                    have your Potential Total Return of Investment.
+                  </p>
+                ) : (
+                  <p>
+                    Welcome&#33; This is a Compound Interest Calculator.
+                    <br />
+                    To start using it, enter sums in Initial Deposit&#39;s and
+                    Contribution&#39;s inputs; and a quantity in the Average
+                    Annual Return input at the bottom. You may modify the
+                    Contribution frequency and the Term of Investment, or leave
+                    them as they&#39;re set by default.
+                    <br />
+                    When you&#39;re done, click the button or hit enter.
+                  </p>
+                )}
+              </div>
+            </section>
           </div>
         </div>
       </section>

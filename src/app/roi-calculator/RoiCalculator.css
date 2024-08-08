@@ -120,7 +120,7 @@ form {
 .graph-top-container {
   display: flex;
   flex-direction: column;
-  justify-content: first baseline;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -145,6 +145,18 @@ form {
   height: 432px;
   border-radius: 22px;
   background-color: #2563eb;
+}
+
+.legend-container {
+  display: flex;
+  flex-direction: column;
+  height: 180px;
+  justify-content: center;
+  align-items: center;
+}
+
+.legend {
+  display: block;
 }
 
 @media (max-width: 1024px) {
@@ -204,5 +216,9 @@ form {
     align-items: center;
     margin-left: 2%;
     margin-right: 2%;
+  }
+  .legend {
+    display: flex;
+    max-width: 400px;
   }
 }
