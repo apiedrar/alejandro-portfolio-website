@@ -1,12 +1,9 @@
-import { useState } from "react";
 import { RadioButton } from "primereact/radiobutton";
 import "primereact/resources/themes/mira/theme.css";
 import "primeflex/primeflex.css";
 import "./Frequency.css";
 
-export default function DepositFrequency () {
-    const [frequency, setFrequency] = useState("Monthly");
-
+export default function DepositFrequency({frequency, setFrequency}) {
     return (
         <div className="radio">
             <div className="individual-radio-containers">

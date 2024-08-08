@@ -1,32 +1,58 @@
 "use client";
 import Navbar from "@/app/Navbar.jsx";
+import { useState } from "react";
 import { Button } from "primereact/button";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 import InitialDeposit from "./InitialDeposit.jsx";
 import Contribution from "./Contribution.jsx";
 import DepositFrequency from "./Frequency.jsx";
 import Percent from "./Percent.jsx";
 import Term from "./Term.jsx";
+import { handleSubmit } from "./utils.js";
 import "primereact/resources/themes/mira/theme.css";
 import "primeflex/primeflex.css";
 import "./RoiCalculator.css";
 
-export default function CalculadoraRoi() {
+export default function RoiCalculator() {
+  const [initialDeposit, setInitialDeposit] = useState(null);
+  const [contribution, setContribution] = useState(null);
+  const [frequency, setFrequency] = useState("Monthly");
+  const [term, setTerm] = useState(5);
+  const [percent, setPercent] = useState(null);
+  const [graphData, setGraphData] = useState<Array<any>>([]);
+  const [futureBalance, setFutureBalance] = useState(0);
   const usDollar = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
     maximumFractionDigits: 0,
   });
-  let roi = 20244;
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) =>
+  const submition = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const formData = { initialDeposit, contribution, frequency, term, percent };
+
+    const { graphData, futureBalance } = handleSubmit({ formData });
+
+    setGraphData(graphData);
+    setFutureBalance(futureBalance);
+  };
 
   return (
     <main>
       <Navbar />
       <section className="calculator-top-container">
         <div className="roi-calculus">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={submition}>
             <div className="bottom-spacing initial-deposit">
               <label
                 htmlFor="initial-deposit"
@@ -34,28 +60,43 @@ export default function CalculadoraRoi() {
               >
                 INITITAL DEPOSIT
               </label>
-              <InitialDeposit />
+              <InitialDeposit
+                initialDeposit={initialDeposit}
+                setInitialDeposit={setInitialDeposit}
+              />
             </div>
             <div className="bottom-spacing">
               <label htmlFor="contributions" className="block spacing toplabel">
                 CONTRIBUTIONS
               </label>
-              <Contribution />
+              <Contribution
+                contribution={contribution}
+                setContribution={setContribution}
+              />
             </div>
             <div>
-              <DepositFrequency />
+              <DepositFrequency
+                frequency={frequency}
+                setFrequency={setFrequency}
+              />
             </div>
             <div className="slider-spacing">
               <label htmlFor="pay-term" className="block spacing toplabel">
                 TERM OF INVESTMENT
               </label>
-              <Term />
+              <Term term={term} setTerm={setTerm} />
             </div>
-            <div className="wololo">
-              <label className="block toplabel">AVERAGE ANNUAL RETURN</label>
-              <Percent />
+            <div className="average-return">
+              <label className="block spacing toplabel">
+                AVERAGE ANNUAL RETURN
+              </label>
+              <Percent percent={percent} setPercent={setPercent} />
             </div>
-            <Button className="block bouton" label="Calculate my estimate" />
+            <Button
+              type="submit"
+              className="block bouton"
+              label="Calculate my estimate"
+            />
           </form>
           <div className="result-graph">
             <div className="graph-top-container">
@@ -66,9 +107,34 @@ export default function CalculadoraRoi() {
                 POTENTIAL FUTURE BALANCE:
               </label>
               <div className="final-result" id="return-of-investment">
-                US{usDollar.format(roi)}
+                US{usDollar.format(futureBalance)}
               </div>
-              <div className="graph"></div>
+              <div className="graph">
+                <ResponsiveContainer width="98%" height="90%">
+                  <BarChart
+                    data={graphData}
+                    margin={{ top: 50, right: 15, bottom: 0, left: 15 }}
+                  >
+                    <Bar
+                      name="Investment"
+                      dataKey="investedAmount"
+                      fill="#cabfdb"
+                      stackId="a"
+                    />
+                    <Bar
+                      name="Return"
+                      dataKey="returnAmount"
+                      fill="#9680b8"
+                      stackId="a"
+                    />
+                    <CartesianGrid stroke="#cabfdb" vertical={false} />
+                    <XAxis stroke="#cabfdb" dataKey="year" />
+                    <YAxis type="number" stroke="#cabfdb" />
+                    <Tooltip cursor={{ stroke: "#cabfdb", opacity: "20%" }} />
+                    <Legend />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
           </div>
         </div>

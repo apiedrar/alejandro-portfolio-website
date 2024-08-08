@@ -7,18 +7,12 @@
 }
 
 .p-radiobutton-input:checked + .p-radiobutton-box {
-  border: 6px solid #a3309c;
+  border: 6px solid #624094;
 }
 
 .p-radiobutton-box {
   background-color: transparent;
-  border: 1px solid black;
-}
-
-@media (prefers-color-scheme: dark) {
-  .p-radiobutton-box {
-    border: 1px solid white;
-  }
+  border: 1px solid rgb(var(--foreground-rgb));
 }
 
 .p-radiobutton-icon {
@@ -35,4 +29,10 @@
 .radiolabel {
   font-size: 24px;
   font-weight: 400;
+}
+
+@media (max-width: 1280px) {
+  .radio {
+    margin-bottom: 5%;
+  }
 }

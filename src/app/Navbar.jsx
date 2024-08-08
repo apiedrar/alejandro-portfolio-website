@@ -6,12 +6,12 @@ import { useState } from "react";
 
 export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
-    const handleNav = () => {
+    const toggleNav = () => {
         setMenuOpen(!menuOpen);
     }
 
     return(
-      <nav className="fixed w-screen h-24 mb-100px bg-black">
+      <nav className="fixed z-40 w-screen h-24 mb-100px bg-[#dbdfe0] dark:bg-black">
         <div className="flex justify-between items-center h-full w-full px-4">
           <Link href="/">
             <h1 className="text-lg lg:text-5xl inline">
@@ -28,11 +28,11 @@ export default function Navbar() {
               </Link>
             </ul>
           </div>
-          <div onClick={handleNav} className="sm:hidden cursor-pointer pl-24"><Bars3Icon className="size-7" />
+          <div onClick={toggleNav} className="sm:hidden cursor-pointer pl-24"><Bars3Icon className="size-7" />
           </div>
-          <div className={menuOpen ? "fixed top-0 left-0 w-screen sm:hidden h-[28%] bg-black p-10 ease-in duration-500" : "fixed top-[-100%] left-0 p-10 ease-in duration-500"}>
+          <div className={menuOpen ? "fixed z-40 top-0 left-0 w-screen sm:hidden h-[28%] bg-[#dbdfe0] p-10 ease-in duration-500 dark:bg-black" : "fixed z-40 top-[-100%] left-0 p-10 ease-in duration-500"}>
             <div className="flex w-full items-center justify-end">
-              <div onClick={handleNav} className="cursor-pointer">
+              <div onClick={toggleNav} className="cursor-pointer">
                 <XMarkIcon className="size-7"/>
               </div>
             </div>
