@@ -29,10 +29,6 @@ body {
   min-height: 100vh;
 }
 
-main {
-  min-height: 100vh;
-}
-
 .calculator-top-container {
   display: flex;
   flex-direction: row;
@@ -164,10 +160,6 @@ form {
 }
 
 @media (max-width: 1280px) {
-  .general-container {
-    flex-direction: column;
-    align-items: center;
-  }
   .roi-calculus {
     flex-direction: column;
     width: 70vw;
