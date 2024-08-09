@@ -18,13 +18,9 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
+  background: linear-gradient(transparent, rgb(var(--background-end-rgb)))
     rgb(var(--background-start-rgb));
-  min-height: 100dvh;
+  min-height: 120dvh;
 }
 
 .calculator-top-container {
@@ -158,9 +154,6 @@ form {
 }
 
 @media (max-width: 1280px) {
-  body {
-    min-height: 110dvh;
-  }
   .general-container {
     flex-direction: column;
     align-items: center;
@@ -217,9 +210,9 @@ form {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   body {
-    min-height: 160vh;
+    min-height: 400vh;
   }
   .roi-calculus {
     margin-top: 150px;
