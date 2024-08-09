@@ -217,6 +217,9 @@ form {
   .roi-calculus {
     margin-top: 150px;
   }
+  .average-return {
+    margin-left: 10%;
+  }
   .result-graph {
     align-items: center;
     margin-top: 5%;

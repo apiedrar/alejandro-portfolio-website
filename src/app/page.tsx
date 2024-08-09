@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-stretch">
       <Navbar />
-      <div className="max-w-[240px] justify-center font-mono mt-52 mb-12 lg:flex lg:max-w-full">
+      <div className="max-w-[240px] justify-center font-mono mt-52 mb-12 md:max-w-full lg:flex">
         <h2 className="text-lg lg:text-4xl">Welcome to my Website!</h2>
       </div>
 

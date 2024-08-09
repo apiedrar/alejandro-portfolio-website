@@ -14,12 +14,12 @@ export default function Navbar() {
       <nav className="fixed z-40 w-screen h-24 mb-100px bg-[#dbdfe0] dark:bg-black">
         <div className="flex justify-between items-center h-full w-full px-4">
           <Link href="/">
-            <h1 className="text-lg lg:text-5xl inline">
+            <h1 className="text-lg md:text-5xl inline">
               Alejandro Piedra Rios
             </h1>
           </Link>
-          <div className="hidden sm:flex">
-            <ul className="hidden sm:flex">
+          <div className="hidden md:flex">
+            <ul className="hidden md:flex">
               <Link href="https://www.linkedin.com/in/apiedrar/" target="_blank">
                 <li className="ml-5 hover:border p-4 text-xl">Contact Me</li>
               </Link>
@@ -28,9 +28,9 @@ export default function Navbar() {
               </Link>
             </ul>
           </div>
-          <div onClick={toggleNav} className="sm:hidden cursor-pointer pl-24"><Bars3Icon className="size-7" />
+          <div onClick={toggleNav} className="md:hidden cursor-pointer pl-24"><Bars3Icon className="size-7" />
           </div>
-          <div className={menuOpen ? "fixed z-40 top-0 left-0 w-screen sm:hidden h-[28%] bg-[#dbdfe0] p-10 ease-in duration-500 dark:bg-black" : "fixed z-40 top-[-100%] left-0 p-10 ease-in duration-500"}>
+          <div className={menuOpen ? "fixed z-40 top-0 left-0 w-screen md:hidden h-[28%] bg-[#dbdfe0] p-10 ease-in duration-500 dark:bg-black" : "fixed z-40 top-[-100%] left-0 p-10 ease-in duration-500"}>
             <div className="flex w-full items-center justify-end">
               <div onClick={toggleNav} className="cursor-pointer">
                 <XMarkIcon className="size-7"/>
