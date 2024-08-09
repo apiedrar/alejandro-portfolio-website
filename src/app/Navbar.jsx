@@ -30,7 +30,7 @@ export default function Navbar() {
           </div>
           <div onClick={toggleNav} className="md:hidden cursor-pointer pl-24"><Bars3Icon className="size-7" />
           </div>
-          <div className={menuOpen ? "fixed z-40 top-0 left-0 w-screen md:hidden h-[28%] bg-[#dbdfe0] p-10 ease-in duration-500 dark:bg-black" : "fixed z-40 top-[-100%] left-0 p-10 ease-in duration-500"}>
+          <div className={menuOpen ? "fixed z-40 top-0 left-0 w-screen md:hidden h-[32%] bg-[#dbdfe0] p-10 ease-in duration-500 dark:bg-black" : "fixed z-40 top-[-100%] left-0 p-10 ease-in duration-500"}>
             <div className="flex w-full items-center justify-end">
               <div onClick={toggleNav} className="cursor-pointer">
                 <XMarkIcon className="size-7"/>
