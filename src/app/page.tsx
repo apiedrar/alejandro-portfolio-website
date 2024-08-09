@@ -48,8 +48,8 @@ export default function Home() {
           </h2>
           <p className="m-0 max-w-[90%] text-sm">
             Enter the amounts and simulate how the interest would compound over
-            time by periodically reinvesting your returns as well as the money
-            you&#39;re investing.
+            time by periodically reinvesting your returns as well as the deposits
+            you&#39;ll be making.
           </p>
         </Link>
       </div>
