@@ -29,7 +29,7 @@ export default function Home() {
           everything you find interesting.
         </p>
         <br />
-        <h4>
+        <h4 className="text-[18px] tracking-[1.6px] md:text-[22px]">
           <b>You&#39;re my guest of honor</b> ✨
         </h4>
       </div>
