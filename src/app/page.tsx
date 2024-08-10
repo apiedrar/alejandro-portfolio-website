@@ -8,7 +8,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-stretch">
       <Navbar />
       <div className="max-w-[240px] justify-center font-mono mt-52 mb-12 md:max-w-full lg:flex">
-        <h2 className="text-lg lg:text-4xl">Welcome to my Website!</h2>
+        <h2 className="text-base md:text-4xl">Welcome to my Website!</h2>
       </div>
 
       <div className="relative z-[-1] flex place-items-center before:absolute before:h-[800px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-to-br before:from-transparent before:to-[#cabfdb] before:opacity-10 before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[400px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-[#624094] after:via-[#472083] after:blur-2xl after:content-[''] after:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
@@ -48,8 +48,8 @@ export default function Home() {
           </h2>
           <p className="m-0 max-w-[90%] text-sm">
             Enter the amounts and simulate how the interest would compound over
-            time by periodically reinvesting your returns as well as the deposits
-            you&#39;ll be making.
+            time by periodically reinvesting your returns as well as the
+            deposits you&#39;ll be making.
           </p>
         </Link>
       </div>

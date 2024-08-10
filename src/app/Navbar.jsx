@@ -14,17 +14,17 @@ export default function Navbar() {
       <nav className="fixed z-40 w-screen h-24 mb-100px bg-[#dbdfe0] dark:bg-black">
         <div className="flex justify-between items-center h-full w-full px-4">
           <Link href="/">
-            <h1 className="text-lg md:text-5xl inline">
+            <h1 className="text-lg md:text-2xl lg:text-5xl inline">
               Alejandro Piedra Rios
             </h1>
           </Link>
           <div className="hidden md:flex">
             <ul className="hidden md:flex">
               <Link href="https://www.linkedin.com/in/apiedrar/" target="_blank">
-                <li className="ml-5 hover:border p-4 text-xl">Contact Me</li>
+                <li className="ml-5 hover:border p-4 text-lg md:text-xl">Contact Me</li>
               </Link>
               <Link href="https://www.github.com/apiedrar/apr-portfolio-web" target="_blank">
-                <li className="mx-5 hover:border p-4 text-xl">View on GitHub <ArrowUpRightIcon className="size-6 inline" /></li>
+                <li className="mx-5 hover:border p-4 text-lg md:text-xl">View on GitHub <ArrowUpRightIcon className="size-6 inline" /></li>
               </Link>
             </ul>
           </div>
