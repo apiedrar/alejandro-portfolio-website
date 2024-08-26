@@ -4,17 +4,17 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  background-image: image("@/public/Toggipon-background.jpg");
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
+    --foreground-rgb: 0, 0, 0;
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
+  background-image: url("/Toggipon-background.jpg");
   background-size: cover;
   background-attachment: fixed;
   min-height: 100vh;
