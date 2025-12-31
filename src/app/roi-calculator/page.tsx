@@ -1,5 +1,5 @@
 "use client";
-import Navbar from "@/app/Navbar.jsx";
+import Navbar from "@/app/Navbar";
 import { useState } from "react";
 import { Button } from "primereact/button";
 import {

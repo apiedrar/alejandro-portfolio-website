@@ -7,7 +7,10 @@
     "dev-server": "nodemon backend/server.js",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch",
+    "test:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --coverage"
   },
   "type": "module",
   "dependencies": {
@@ -24,18 +27,29 @@
     "react": "19.2.1",
     "react-dom": "19.2.1",
     "react-transition-group": "^4.4.5",
-    "recharts": "^2.15.4"
+    "recharts": "^2.15.4",
+    "zustand": "^5.0.9"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.1",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20.19.9",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
+    "@types/supertest": "^6.0.3",
     "eslint": "^9.32.0",
     "eslint-config-next": "16.0.7",
+    "eslint-plugin-jest": "^29.11.0",
+    "eslint-plugin-testing-library": "^7.15.3",
+    "jest": "^30.2.0",
     "next": "16.0.7",
     "nodemon": "^3.1.10",
     "postcss": "^8.5.6",
+    "supertest": "^7.1.4",
     "tailwindcss": "^3.4.17",
+    "ts-jest": "^29.4.6",
     "typescript": "^5.9.2"
   },
   "pnpm": {
