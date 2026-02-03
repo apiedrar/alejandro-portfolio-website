@@ -29,7 +29,6 @@ const productSchema = new mongoose.Schema({
         required: true
     },
     specifications: {
-        type: Object,
         storage: {
             type: String,
             required: true,
@@ -46,12 +45,6 @@ const productSchema = new mongoose.Schema({
     isActive: {
         type: Boolean,
         default: true,
-    },
-    createdAt: {
-        type: Date,
-    },
-    updatedAt: {
-        type: Date,
     }
 }, {
     timestamps: true // createdAt, updatedAt

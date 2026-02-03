@@ -1,56 +1,63 @@
 import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema({
-    orderNumber: {
+    orderNumber: { // "APR-20260101-0001" (unique)
         type: String,
         unique: true,
         required: true
     },
-    customerEmail: {
+    customerEmail: { // "john@example.com"
         type: String,
         required: true,
     },
-    customerName: {
+    customerName: { // "John Doe"
         type: String,
         required: true,
     },
-    items: {
-        type: Array,
-        required: true,
-        items: {
-            productId: {
-                type: String,
-                ref: ObjectId,
-                required: true,
-            },
-            quantity: {
-                type: Number,
-                required: true,
-            },
-            price: {
-                type: Number,
-                required: true,
-            },
+    items: [{
+        productId: { // Reference to Product._id
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product',
+            required: true,
         },
-    },
-    totalAmount: {
+        productName: { // "Product Name" snapshot at purchase time
+            type: String,
+            required: true,
+        },
+        price: { // "Price" at purchase time
+            type: Number,
+            required: true,
+        },
+        quantity: { // 1 or 2, etc
+            type: Number,
+            required: true,
+        },
+        subtotal: { // price * quantity
+            type: Number,
+            required: true,
+        },
+    }],
+    totalAmount: { // sum of all subtotals
         type: Number,
         required: true,
     },
-    status: {
+    status: { // "pending", "paid", "completed", "failed"
+        type: String,
+        enum: ['pending', 'paid', 'completed', 'failed'],
+        default: 'pending',
+        required: true,
+    },
+    stripeSessionId: { // Reference to Stripe Checkout Session ID
         type: String,
         required: true,
     },
-    stripeSessionId: {
+    stripePaymentIntentId: { // Reference to Stripe Payment Intent ID
         type: String,
-        required: true,
     },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now,
-    }
-})
+}, {
+    timestamps: true // createdAt, updatedAt
+});
+
+const Order = mongoose.model('Order', orderSchema);
+
+export default Order;

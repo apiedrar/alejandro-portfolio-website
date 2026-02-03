@@ -34,7 +34,7 @@ export default function Home() {
         </h4>
       </div>
 
-      <div className="mb-5 grid text-center max-w-[60ch] lg:text-left">
+      <div className="mb-4 flex flex-col lg:flex-row text-center max-w-[80ch] lg:text-left gap-4">
         <Link
           href="/roi-calculator"
           className="rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
@@ -50,6 +50,22 @@ export default function Home() {
             Enter the amounts and simulate how the interest would compound over
             time by periodically reinvesting your returns as well as the
             deposits you&#39;ll be making.
+          </p>
+        </Link>
+        <Link
+          href="/shop"
+          className="rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
+          rel="noopener noreferrer"
+        >
+          <h2 className="mb-3 text-2xl font-semibold">
+            Sandbox Shop{" "}
+            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+              -&gt;
+            </span>
+          </h2>
+          <p className="m-0 max-w-[90%] text-sm">
+            A demo e-commerce experience. Browse products, add to cart, and
+            checkout with Stripe test mode.
           </p>
         </Link>
       </div>
