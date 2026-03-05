@@ -20,6 +20,8 @@
 .DS_Store
 *.pem
 edits.js
+dependabot-alerts/
+Analyzing Project and Next Steps.md
 
 # debug
 npm-debug.log*
