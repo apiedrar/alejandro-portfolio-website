@@ -59,7 +59,26 @@ export default function Home() {
             </span>
           </h2>
           <p className="m-0 max-w-[90%] text-sm">
-            Demo e&ndash;commerce system built to showcase how I design and structure a modern web application, with a strong focus on clarity, separation of concerns, and predictable state flow.
+            Demo e&ndash;commerce system built to showcase how I design and
+            structure a modern web application, with a strong focus on clarity,
+            separation of concerns, and predictable state flow.
+          </p>
+        </Link>
+        <Link
+          href="https://food-nutrition-calculator-nextjs.vercel.app/"
+          className="rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
+          rel="noopener noreferrer"
+        >
+          <h2 className="mb-3 text-2xl font-semibold">
+            Food Nutrition{" "}
+            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+              -&gt;
+            </span>
+          </h2>
+          <p className="m-0 max-w-[90%] text-sm">
+            Food nutrition calculator built to showcase how I design and
+            structure a modern web application, with a strong focus on clarity,
+            separation of concerns, and predictable state flow.
           </p>
         </Link>
       </div>
