@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Navbar from '../Navbar';
-import { ProductCard } from '@/components/shop';
+import { ProductCard, DemoDisclaimerModal } from '@/components/shop';
 import './shop.css';
 
 interface Product {
@@ -20,8 +20,12 @@ export default function ShopPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
+    const [showDisclaimer, setShowDisclaimer] = useState(false);
 
     useEffect(() => {
+        if (!sessionStorage.getItem('shop_guest_acknowledged')) {
+            setShowDisclaimer(true);
+        }
         fetchProducts();
     }, []);
 
@@ -53,6 +57,9 @@ export default function ShopPage() {
 
     return (
         <main className="min-h-screen shop-container">
+            {showDisclaimer && (
+                <DemoDisclaimerModal onClose={() => setShowDisclaimer(false)} />
+            )}
             <Navbar />
 
             <header className="shop-header">
