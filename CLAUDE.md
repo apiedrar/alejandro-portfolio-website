@@ -47,7 +47,7 @@ Tailwind CSS (primary) + PrimeReact components + PrimeFlex. Dark mode uses `dark
 - All tests use **ESM** (`"type": "module"` in `package.json`). The Jest config uses `ts-jest` ESM preset.
 - `testMatch` only covers `**/*.test.js` — test files must use the `.test.js` extension, not `.test.ts`.
 - Backend tests use `jest.unstable_mockModule()` for ESM-compatible mocking. Imports that depend on mocked modules must come **after** the mock declarations (see `backend/__tests__/product.controller.test.js`).
-- No frontend tests exist yet. Frontend test setup uses `@testing-library/react`.
+- Frontend tests scaffolded with `@testing-library/react` but not yet implemented. Planned after order route completion.
 
 ## Environment
 

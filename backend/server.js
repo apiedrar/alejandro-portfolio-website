@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 8888; // Port number
 
 const corsOptions = { // Configures CORS options
     origin: function (origin, callback) { // Function to check allowed origins
-        const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001']; // List of allowed origins
+        const allowedOrigins = ['https://localhost:3000', 'https://localhost:3001']; // List of allowed origins
 
         // Allow requests with no origin (Postman, mobile apps, etc.)
         if (!origin) return callback(null, true);
@@ -24,7 +24,7 @@ const corsOptions = { // Configures CORS options
         }
     },
     credentials: true, // Allow cookies
-    methods: ['GET', 'PUT', 'POST', 'DELETE'], // Allow these HTTP methods
+    methods: ['GET', 'PATCH', 'POST', 'DELETE'], // Allow these HTTP methods
     allowedHeaders: ['Content-Type', 'Authorization'] // Allow these headers
 };
 

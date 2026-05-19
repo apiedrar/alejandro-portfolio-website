@@ -3,11 +3,13 @@ import mongoose from "mongoose";
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        maxlength: [30, 'So thirty characters were insufficient, huh?']
     },
     price: {
         type: Number,
-        required: true
+        required: true,
+        min: [0.99, 'Profit is required even in sandbox, son']
     },
     image: {
         type: String,
@@ -20,13 +22,16 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    tags: {
+        type: [String],
+        required: true
+    },
     brand: {
         type: String,
         required: true
     },
     stock: {
         type: Number,
-        required: true
     },
     specifications: {
         storage: {
@@ -41,6 +46,10 @@ const productSchema = new mongoose.Schema({
             type: String,
             required: true,
         },
+    },
+    onSale: {
+        type: Boolean,
+        default: false
     },
     isActive: {
         type: Boolean,
