@@ -1,13 +1,18 @@
-# Hello, welcome to my portfolio site repo! 👋🏻
+# Alex's Portfolio Website
 
+## Project Description
+### Compound Interest Calculator
 
-> Feel free to navigate through the files and make good use of everything you find interesting.
+### Sandbox E-commerce
 
+## The 'Why?' Answered
 
-> You're my guest of honor ✨
+## Design Decisions
 
+## API Endpoints
 
----
+## Setup Instructions
 
+## How To Run Tests
 
-## Alejandro.
+## Areas For Improvement

@@ -3,20 +3,18 @@
   "version": "2.1.0",
   "private": true,
   "scripts": {
-    "dev-client": "next dev",
-    "dev-server": "nodemon backend/server.js",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "deps:alerts": "node scripts/dependabot.mjs alerts",
+    "deps:prs": "node scripts/dependabot.mjs prs",
+    "deps:audit": "node scripts/dependabot.mjs audit"
   },
   "type": "module",
   "dependencies": {
     "@heroicons/react": "^2.2.0",
-    "cors": "^2.8.6",
     "date-fns": "^3.6.0",
-    "dotenv": "^17.3.1",
-    "express": "^5.2.1",
-    "mongoose": "^8.23.0",
     "next": "16.2.6",
     "primeflex": "3.3.1",
     "primeicons": "^7.0.0",
@@ -33,8 +31,7 @@
     "eslint": "^9.39.3",
     "eslint-config-next": "16.1.6",
     "next": "16.2.6",
-    "nodemon": "^3.1.14",
-    "postcss": "^8.5.10",
+    "postcss": "^8.5.15",
     "tailwindcss": "^3.4.19",
     "typescript": "^5.9.3"
   },
