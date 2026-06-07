@@ -1,12 +1,12 @@
 'use client';
-import { useCartStore } from "@/stores/cartStore";
+// import { useCartStore } from "@/stores/cartStore";
 import Link from "next/link";
 import { Bars3Icon } from "@heroicons/react/16/solid";
 import { XMarkIcon } from "@heroicons/react/16/solid";
 import { ArrowUpRightIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { ShoppingCartIcon } from "@heroicons/react/16/solid";
+// import { ShoppingCartIcon } from "@heroicons/react/16/solid";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -15,7 +15,7 @@ export default function Navbar() {
   const toggleNav = () => {
     setMenuOpen(!menuOpen);
   }
-  const itemCount = useCartStore((state) => state.getItemCount);
+  // const itemCount = useCartStore((state) => state.getItemCount);
 
   return (
     <nav className="fixed z-40 w-screen h-24 mb-100px bg-[#dbdfe0] dark:bg-black">
@@ -30,14 +30,14 @@ export default function Navbar() {
             <Link href="https://www.linkedin.com/in/apiedrar/" target="_blank">
               <li className="ml-5 hover:border p-4 text-lg md:text-xl">Contact Me</li>
             </Link>
-            <Link href="https://www.github.com/apiedrar/apr-portfolio-web" target="_blank">
+            <Link href="https://www.github.com/apiedrar" target="_blank">
               <li className="mx-5 hover:border p-4 text-lg md:text-xl">View on GitHub <ArrowUpRightIcon className="size-6 inline" /></li>
             </Link>
-            {isShop && (
+            {/* {isShop && (
               <Link href="/shop/cart">
                 <li className="mx-5 hover:border p-4 text-lg md:text-xl"> {itemCount > 0 && `(${itemCount})`}<ShoppingCartIcon className="size-6 inline" /></li>
               </Link>
-            )}
+            )} */}
           </ul>
         </div>
         <div onClick={toggleNav} className="md:hidden cursor-pointer pl-24"><Bars3Icon className="size-7" />
@@ -53,14 +53,14 @@ export default function Navbar() {
               <Link href="https://www.linkedin.com/in/apiedrar/" target="_blank">
                 <li className="py-4 cursor-pointer">Contact Me</li>
               </Link>
-              <Link href="https://www.github.com/apiedrar/alejandro-portfolio-website" target="_blank">
+              <Link href="https://www.github.com/apiedrar" target="_blank">
                 <li className="py-4 cursor-pointer">View on GitHub <ArrowUpRightIcon className="size-6 inline" /></li>
               </Link>
-              {isShop && (
+              {/* {isShop && (
                 <Link href="/shop/cart">
                   <li className="py-4 cursor-pointer">{itemCount > 0 && `(${itemCount})`}<ShoppingCartIcon className="size-6 inline" /></li>
                 </Link>
-              )}
+              )} */}
             </ul>
           </div>
         </div>

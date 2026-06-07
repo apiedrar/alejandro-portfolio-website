@@ -1,5 +1,5 @@
 "use client";
-import Navbar from "@/app/Navbar.jsx";
+import Navbar from "@/app/Navbar";
 import { useState } from "react";
 import { Button } from "primereact/button";
 import {
@@ -12,22 +12,22 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import InitialDeposit from "./InitialDeposit.jsx";
-import Contribution from "./Contribution.jsx";
-import DepositFrequency from "./Frequency.jsx";
-import Percent from "./Percent.jsx";
-import Term from "./Term.jsx";
-import { handleSubmit } from "./utils.js";
+import InitialDeposit from "./InitialDeposit";
+import Contribution from "./Contribution";
+import DepositFrequency from "./Frequency";
+import Percent from "./Percent";
+import Term from "./Term";
+import { handleSubmit } from "./utils";
 import "primereact/resources/themes/mira/theme.css";
 import "primeflex/primeflex.css";
 import "./RoiCalculator.css";
 
 export default function RoiCalculator() {
-  const [initialDeposit, setInitialDeposit] = useState(null);
-  const [contribution, setContribution] = useState(null);
+  const [initialDeposit, setInitialDeposit] = useState<number | null>(null);
+  const [contribution, setContribution] = useState<number | null>(null);
   const [frequency, setFrequency] = useState("Monthly");
-  const [term, setTerm] = useState(5);
-  const [percent, setPercent] = useState(null);
+  const [term, setTerm] = useState<number | 1>(1);
+  const [percent, setPercent] = useState<number | null>(null);
   const [graphData, setGraphData] = useState<Array<any>>([]);
   const [futureBalance, setFutureBalance] = useState(0);
   const usDollar = new Intl.NumberFormat("en-US", {

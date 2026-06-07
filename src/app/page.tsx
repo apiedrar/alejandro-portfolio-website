@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import Navbar from "./Navbar.jsx";
+import Navbar from "./Navbar";
 import Link from "next/link.js";
 
 export default function Home() {
