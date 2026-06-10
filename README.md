@@ -38,7 +38,7 @@ The deployed ROI Calculator shows I ship to production; this sandbox shows the e
 - Monorepo for portfolio + e-commerce
 My portfolio site functions as a hub linking to my most relevant work. Keeping the e-commerce sandbox on a branch of the same Next.js codebase lets me reuse the design system, routing, and component patterns rather than maintaining two separate projects.
 - Two-process local development
-The frontend (`:3000`) and backend (`:9999`) run as independent processes, each independently deployable, with a one-directional dependency: the frontend consumes the backend's API contract, not the other way around. In `dev` they communicate cross-origin with CORS configured on the backend, deliberately mirroring a production topology where the API is a separately deployed service. A single-origin setup via Next.js `rewrites()` is the alternative, but cross-origin was chosen to keep the dev environment faithful to how the services will be deployed.
+The frontend (`:3000`) and backend (`:5000`) run as independent processes, each independently deployable, with a one-directional dependency: the frontend consumes the backend's API contract, not the other way around. In `dev` they communicate cross-origin with CORS configured on the backend, deliberately mirroring a production topology where the API is a separately deployed service. A single-origin setup via Next.js `rewrites()` is the alternative, but cross-origin was chosen to keep the dev environment faithful to how the services will be deployed.
 - Express + Mongoose Backend
 The e-commerce sandbox exists in part to showcase MERN stack engineering. Using `Next.js API routes` would have collapsed the backend into the frontend part of the project and undermined that purpose. Keeping Express as a separate service also makes the backend independently  deployable and testable, which matters for the payment-flow patterns this project is planned to implement.
 ### Stack & Tooling
@@ -62,9 +62,146 @@ Currently `Navbar.tsx` lives in `src/app/` and is imported by each page individu
 
 ## API Endpoints
 
+Base URL: `http://localhost:5000`
+
+Only the **Products** routes are currently registered (`server.js` → `app.use("/api/products", productRoutes)`). All responses are JSON and follow a `{ success, data | message }` envelope.
+
+### Products — `/api/products`
+
+| Method | Path   | Description                  | Body |
+| ------ | ------ | ---------------------------- | ---- |
+| GET    | `/`    | List all products            | —    |
+| GET    | `/:id` | Get a single product by ID   | —    |
+| POST   | `/`    | Create a product             | Product object |
+| PATCH  | `/:id` | Update a product (partial)   | Partial product object |
+| DELETE | `/:id` | Delete a product             | —    |
+
+**Product request body** (POST/PATCH):
+
+```json
+{
+  "name": "Binary Search Tree",
+  "price": 49.99,
+  "image": "https://example.com/bst.png",
+  "description": "Self-balancing, sold by the node.",
+  "category": "Data Structures",
+  "tags": ["tree", "logarithmic"],
+  "brand": "Acme DSA",
+  "stock": 42,
+  "specifications": { "storage": "O(n)", "color": "Red-Black", "ram": "8GB" },
+  "onSale": false,
+  "isActive": true
+}
+```
+
+Required: `name` (≤30 chars), `price` (≥0.99), `image`, `category`, `tags`, `brand`, and `specifications`. `stock`, `description`, `onSale`, `isActive` are optional (`onSale`/`isActive` default to `false`/`true` respectively).
+
+**Success responses**
+
+```jsonc
+// GET /            → 200
+{ "success": true, "data": [ /* products */ ] }
+
+// GET /:id         → 200
+{ "success": true, "data": { /* product */ } }
+
+// POST /           → 201
+{ "success": true, "data": { /* created product */ } }
+
+// PATCH /:id       → 200
+{ "success": true, "data": { /* updated product */ } }
+
+// DELETE /:id      → 200
+{ "success": true, "message": "Product <name> deleted" }
+```
+
+**Error responses**
+
+```jsonc
+// Invalid/unknown ID → 404
+{ "success": false, "message": "Product not found, check the ID and try again" }
+
+// Server/validation error → 500
+{ "success": false, "message": "Server error" }
+```
+
+### Orders — *Not yet wired up*
+
+`backend/models/order.model.js` exists (schema includes `orderNumber`, `items`, `totalAmount`, `status`, and Stripe session/payment-intent fields), but no order routes are registered in `server.js` yet. Endpoints will be documented here once the checkout flow lands.
+
 ## Setup Instructions
 
+### Prerequisites
+
+- **Node.js** 20.9+ (Next.js 16 requirement)
+- **pnpm** (`npm install -g pnpm`, or enable via `corepack enable`)
+- **MongoDB** — a running instance (local `mongod` or a MongoDB Atlas connection string)
+
+> Backend code and the e-commerce work live on the `mern-makeover` branch.
+
+### 1. Clone & install
+
+```bash
+git clone https://github.com/apiedrar/alejandro-portfolio-website.git
+cd alejandro-portfolio-website
+git checkout mern-makeover
+pnpm install
+```
+
+### 2. Configure the backend env
+
+Create a `.env` file in the project root:
+
+```bash
+# .env
+MONGO_URI=mongodb://localhost:27017/alejandro-portfolio-website   # or your Atlas URI
+PORT=5000
+```
+
+### 3. (Optional) Configure the frontend env
+
+The frontend defaults to `http://localhost:3000`. To point it elsewhere, create `.env.local`:
+
+```bash
+# .env.local
+NEXT_PUBLIC_API_URL=http://localhost:5000
+```
+
+### 4. Run the dev environment
+
+The frontend and backend are two independent processes — run each in its own terminal:
+
+```bash
+pnpm dev-client   # Next.js frontend → http://localhost:3000
+pnpm dev-server   # Express backend  → http://localhost:5000 (nodemon)
+```
+
+### 5. Build for production
+
+```bash
+pnpm build        # Next.js production build
+pnpm start        # Serve the built frontend
+```
+
+> `pnpm build` builds the Next.js frontend only; the Express backend is deployed as a separate service.
+
 ## How To Run Tests
+
+Tests run on Jest with the `ts-jest` ESM preset (`NODE_OPTIONS=--experimental-vm-modules`). Test files use the `.test.js` extension.
+
+```bash
+pnpm test            # Run all tests
+pnpm test:watch      # Watch mode
+pnpm test:coverage   # Run with a coverage report
+```
+
+Run a single test file (ESM-compatible invocation):
+
+```bash
+NODE_OPTIONS=--experimental-vm-modules jest backend/__tests__/product.controller.test.js
+```
+
+> Frontend tests are scaffolded with `@testing-library/react` but not yet implemented — planned after the order routes are completed.
 
 ## Areas For Improvement
 - `Navbar.tsx` imported per-page
