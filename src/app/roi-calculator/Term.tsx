@@ -15,7 +15,7 @@ export default function Term({ term, setTerm }: { term: number, setTerm: (value:
                 onChange={(e) => setTerm(e.value as number)}
                 className="p-slider p-slider-handle w-300px"
                 min={1}
-                max={40}
+                max={65}
             />
         </div>
     )

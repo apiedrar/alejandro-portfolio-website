@@ -14,6 +14,7 @@ export default function Contribution({ contribution, setContribution }: { contri
             prefix="US$ "
             locale="en-us"
             min={1}
+            max={100000}
         />
     )
 }

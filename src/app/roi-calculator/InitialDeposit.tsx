@@ -13,5 +13,6 @@ export default function InitialDeposit({ initialDeposit, setInitialDeposit }: { 
     prefix="US$ "
     locale="en-us"
     min={10}
+    max={10000000}
   />)
 }

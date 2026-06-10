@@ -7,13 +7,14 @@ export default function Percent({ percent, setPercent }: { percent: number | nul
   return (
     <div>
       <InputNumber
-        placeholder="Enter Amount"
+        placeholder="Enter Percentage"
         id="percent"
         suffix="%"
         value={percent}
         onValueChange={(e) => setPercent(e.value ?? 0)}
         mode="decimal"
-        min={1}
+        min={2}
+        max={130}
       />
     </div>
   );
