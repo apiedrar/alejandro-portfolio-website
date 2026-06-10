@@ -44,7 +44,7 @@ export default function ProductDetailPage() {
     const fetchProduct = async (id: string) => {
         try {
             setLoading(true);
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:9999';
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://localhost:5000';
             const response = await fetch(`${apiUrl}/api/products/${id}`);
             const data = await response.json();
 

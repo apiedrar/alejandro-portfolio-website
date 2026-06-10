@@ -34,18 +34,8 @@ const productSchema = new mongoose.Schema({
         type: Number,
     },
     specifications: {
-        storage: {
-            type: String,
-            required: true,
-        },
-        color: {
-            type: String,
-            required: true,
-        },
-        ram: {
-            type: String,
-            required: true,
-        },
+        type: Map,
+        required: true
     },
     onSale: {
         type: Boolean,

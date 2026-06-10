@@ -29,7 +29,7 @@ export default function Home() {
         </h4>
       </div>
 
-      <div className="mb-4 flex flex-col lg:flex-row text-center max-w-[80ch] lg:text-left gap-4">
+      <div className="mb-4 flex flex-col lg:flex-row text-center max-w-[80ch] lg:max-w-[110ch] lg:text-left gap-4">
         <Link
           href="/roi-calculator"
           className="rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"

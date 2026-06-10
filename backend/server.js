@@ -7,11 +7,11 @@ import productRoutes from "./routes/product.route.js";
 dotenv.config(); // Loads environment variables from .env file
 
 const app = express(); // Initializes express app
-const PORT = process.env.PORT || 8888; // Port number
+const PORT = process.env.PORT || 5000; // Port number
 
 const corsOptions = { // Configures CORS options
     origin: function (origin, callback) { // Function to check allowed origins
-        const allowedOrigins = ['https://localhost:3000', 'https://localhost:3001']; // List of allowed origins
+        const allowedOrigins = ['http://localhost:3000']; // List of allowed origins
 
         // Allow requests with no origin (Postman, mobile apps, etc.)
         if (!origin) return callback(null, true);
