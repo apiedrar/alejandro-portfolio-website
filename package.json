@@ -19,14 +19,14 @@
     "primeflex": "3.3.1",
     "primeicons": "^7.0.0",
     "primereact": "^10.9.8",
-    "react": "19.2.1",
+    "react": "19.2.7",
     "react-dom": "19.2.1",
     "react-transition-group": "^4.4.5",
     "recharts": "^2.15.4"
   },
   "devDependencies": {
     "@types/node": "^20.19.35",
-    "@types/react": "19.2.7",
+    "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
     "eslint": "^9.39.3",
     "eslint-config-next": "16.2.9",
@@ -37,7 +37,7 @@
   },
   "pnpm": {
     "overrides": {
-      "@types/react": "19.2.7",
+      "@types/react": "19.2.17",
       "@types/react-dom": "19.2.3"
     }
   }
