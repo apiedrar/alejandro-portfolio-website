@@ -110,7 +110,7 @@ export default function RoiCalculator() {
                 US{usDollar.format(futureBalance)}
               </div>
               <div className="graph">
-                <ResponsiveContainer width="98%" height="90%">
+                <ResponsiveContainer width={"98%"} height={"90%"}>
                   <BarChart
                     data={graphData}
                     margin={{ top: 50, right: 15, bottom: 0, left: 15 }}
