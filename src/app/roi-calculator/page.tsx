@@ -24,10 +24,10 @@ import "./RoiCalculator.css";
 
 export default function RoiCalculator() {
   const [initialDeposit, setInitialDeposit] = useState<number | null>(null);
-  const [contribution, setContribution] = useState<number | 0>(0);
+  const [contribution, setContribution] = useState<number | null>(null);
   const [frequency, setFrequency] = useState("Monthly");
-  const [term, setTerm] = useState<number | 0>(0);
-  const [percent, setPercent] = useState<number | 0>(0);
+  const [term, setTerm] = useState<number | 1>(1);
+  const [percent, setPercent] = useState<number | null>(null);
   const [graphData, setGraphData] = useState<Array<any>>([]);
   const [futureBalance, setFutureBalance] = useState(0);
   const usDollar = new Intl.NumberFormat("en-US", {
@@ -110,7 +110,7 @@ export default function RoiCalculator() {
                 US{usDollar.format(futureBalance)}
               </div>
               <div className="graph">
-                <ResponsiveContainer width="98%" height="90%">
+                <ResponsiveContainer width={"98%"} height={"90%"}>
                   <BarChart
                     data={graphData}
                     margin={{ top: 50, right: 15, bottom: 0, left: 15 }}

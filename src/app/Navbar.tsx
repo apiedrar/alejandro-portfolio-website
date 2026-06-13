@@ -15,7 +15,7 @@ export default function Navbar() {
   const toggleNav = () => {
     setMenuOpen(!menuOpen);
   }
-  const itemCount = useCartStore((state) => state.getItemCount);
+  const itemCount = useCartStore((state: { getItemCount: any; }) => state.getItemCount);
 
   return (
     <nav className="fixed z-40 w-screen h-24 mb-100px bg-[#dbdfe0] dark:bg-black">
