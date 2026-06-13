@@ -9,7 +9,7 @@ const mockFindById = jest.fn();
 const mockFindByIdAndUpdate = jest.fn();
 const mockFindByIdAndDelete = jest.fn();
 
-jest.unstable_mockModule('../models/product.model.js', () => ({
+jest.unstable_mockModule('./product.model.js', () => ({
     default: {
         find: mockFind,
         findById: mockFindById,
@@ -19,7 +19,7 @@ jest.unstable_mockModule('../models/product.model.js', () => ({
 }));
 
 // Import routes AFTER mocking the model
-const { default: productRoutes } = await import('../routes/product.route.js');
+const { default: productRoutes } = await import('./product.routes.js');
 
 const app = express();
 app.use(express.json());
@@ -33,8 +33,8 @@ describe('Product API', () => {
     it('should get all products successfully', async () => {
         // Mock data
         const mockProducts = [
-            { _id: '1', name: 'iPhone 16', price: 699, image: 'https://example.com/iphone16.jpg' },
-            { _id: '2', name: 'iPhone 17', price: 799, image: 'https://example.com/iphone17.jpg' },
+            { _id: '1', name: 'iPhone 16', price: 699, image: 'example.com/iphone16.jpg' },
+            { _id: '2', name: 'iPhone 17', price: 799, image: 'example.com/iphone17.jpg' },
         ];
 
         // Mock Product.find() to return our mock data
