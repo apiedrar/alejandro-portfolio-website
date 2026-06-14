@@ -21,9 +21,9 @@ export default {
         ],
     },
     roots: ['<rootDir>/backend', '<rootDir>/src'],
-    testMatch: ['**/__tests__/**/*.test.js', '**/?(*.)+(spec|test).js'],
+    testMatch: ['**/__tests__/**/*.test.ts?(x)', '**/?(*.)+(spec|test).ts?(x)'],
     collectCoverageFrom: [
-        'backend/**/*.js',
+        'backend/**/*.ts',
         'src/**/*.{js,jsx,ts,tsx}',
         '!**/*.d.ts',
     ],
