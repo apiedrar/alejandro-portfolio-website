@@ -1,6 +1,25 @@
 import mongoose from "mongoose";
 
-const orderSchema = new mongoose.Schema({
+export interface IOrderItem {
+    productId: mongoose.Types.ObjectId;
+    productName: string;
+    price: number;
+    quantity: number;
+    subtotal: number;
+}
+
+export interface IOrder {
+    orderNumber: string;
+    customerEmail: string;
+    customerName: string;
+    items: IOrderItem[];
+    totalAmount: number;
+    status: 'pending' | 'paid' | 'completed' | 'failed';
+    stripeSessionId: string;
+    stripePaymentIntentId?: string;
+}
+
+const orderSchema = new mongoose.Schema<IOrder>({
     orderNumber: { // "APR-20260101-0001" (unique)
         type: String,
         unique: true,
@@ -58,6 +77,6 @@ const orderSchema = new mongoose.Schema({
     timestamps: true // createdAt, updatedAt
 });
 
-const Order = mongoose.model('Order', orderSchema);
+const Order = mongoose.model<IOrder>('Order', orderSchema);
 
 export default Order;
