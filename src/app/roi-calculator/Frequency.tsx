@@ -2,8 +2,9 @@ import { RadioButton } from "primereact/radiobutton";
 import "primereact/resources/themes/mira/theme.css";
 import "primeflex/primeflex.css";
 import "./Frequency.css";
+import type { Frequency } from "./utils";
 
-export default function DepositFrequency({ frequency, setFrequency }: { frequency: string, setFrequency: (value: string) => void }) {
+export default function DepositFrequency({ frequency, setFrequency }: { frequency: Frequency; setFrequency: (value: Frequency) => void }) {
     return (
         <div className="radio">
             <div className="individual-radio-containers">
