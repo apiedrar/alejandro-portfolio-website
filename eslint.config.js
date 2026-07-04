@@ -8,5 +8,19 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig([
   ...nextCoreWebVitals,
-  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts"]),
+  {
+    settings: {
+      react: { version: "19" },
+    },
+  },
+  globalIgnores([
+    ".next/**",
+    "out/**",
+    "build/**",
+    "next-env.d.ts",
+    "eslint.config.js",
+    "next.config.mjs",
+    "postcss.config.mjs",
+    "scripts/**",
+  ]),
 ]);

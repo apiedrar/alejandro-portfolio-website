@@ -1,37 +1,36 @@
-import { addDays, addWeeks, addMonths, addYears, startOfDay } from "date-fns";
+type Frequency = "Daily" | "Weekly" | "Monthly" | "Annual";
 
-const calculateStartDate = (frequency) => {
-  const today = startOfDay(new Date());
-
-  switch (frequency) {
-    case "Daily":
-      return addDays(today, 1);
-    case "Weekly":
-      return addWeeks(today, 1);
-    case "Monthly":
-      return addMonths(today, 1);
-    case "Annual":
-      return addYears(today, 1);
-  }
+const FREQUENCY_MAP: Record<Frequency, number> = {
+  Daily: 365,
+  Weekly: 52,
+  Monthly: 12,
+  Annual: 1,
 };
 
-const calculateInvestedAmount = (
-  initialDeposit,
-  contribution,
-  frequency,
-  term
-) => {
-  const frequencyMap = {
-    Daily: 365,
-    Weekly: 52,
-    Monthly: 12,
-    Annual: 1,
-  };
+interface FormData {
+  initialDeposit: number;
+  contribution: number;
+  frequency: Frequency;
+  term: number;
+  percent: number;
+}
 
-  const contributionSpans = frequencyMap[frequency];
+interface GraphDataPoint {
+  year: number;
+  investedAmount: number;
+  returnAmount: number;
+}
+
+const calculateInvestedAmount = (
+  initialDeposit: number,
+  contribution: number,
+  frequency: Frequency,
+  term: number
+): number[] => {
+  const contributionSpans = FREQUENCY_MAP[frequency];
   const annualContribution = contribution * contributionSpans;
 
-  const investedAmounts = [];
+  const investedAmounts: number[] = [];
   for (let i = 0; i <= term; i++) {
     investedAmounts.push(initialDeposit + annualContribution * i);
   }
@@ -39,32 +38,25 @@ const calculateInvestedAmount = (
 };
 
 const calculateReturnAmount = (
-  initialDeposit,
-  contribution,
-  frequency,
-  term,
-  percent
-) => {
-  const frequencyMap = {
-    Daily: 365,
-    Weekly: 52,
-    Monthly: 12,
-    Annual: 1,
-  };
-
-  const contributionSpans = frequencyMap[frequency];
+  initialDeposit: number,
+  contribution: number,
+  frequency: Frequency,
+  term: number,
+  percent: number
+): number[] => {
+  const contributionSpans = FREQUENCY_MAP[frequency];
   const annualContribution = contribution * contributionSpans;
   const annualReturnRate = percent / 100;
 
   let totalInvested = initialDeposit;
-  let returnAmounts = [];
+  const returnAmounts: number[] = [];
 
   for (let i = 0; i <= term; i++) {
     if (i > 0) {
       const previousAmount = totalInvested + returnAmounts[i - 1];
       returnAmounts.push(Math.round(previousAmount * annualReturnRate));
     } else {
-      returnAmounts.push(0); // No return in the initial year
+      returnAmounts.push(0);
     }
     totalInvested += annualContribution;
   }
@@ -73,12 +65,12 @@ const calculateReturnAmount = (
 };
 
 const calculateFutureBalance = (
-  initialDeposit,
-  contribution,
-  frequency,
-  term,
-  percent
-) => {
+  initialDeposit: number,
+  contribution: number,
+  frequency: Frequency,
+  term: number,
+  percent: number
+): number => {
   const investedAmounts = calculateInvestedAmount(
     initialDeposit,
     contribution,
@@ -100,15 +92,13 @@ const calculateFutureBalance = (
   return Math.round(totalBalance);
 };
 
-const handleSubmit = ({ formData }) => {
+const handleSubmit = ({
+  formData,
+}: {
+  formData: FormData;
+}): { graphData: GraphDataPoint[]; futureBalance: number } => {
   const { initialDeposit, contribution, frequency, term, percent } = formData;
 
-  const frequencyMap = {
-    Daily: 365,
-    Weekly: 52,
-    Monthly: 12,
-    Annual: 1,
-  };
   const investedAmounts = calculateInvestedAmount(
     initialDeposit,
     contribution,
@@ -130,18 +120,17 @@ const handleSubmit = ({ formData }) => {
     percent
   );
 
-  const graphData = [];
+  const graphData: GraphDataPoint[] = [];
   const startYear = new Date().getFullYear();
   let totalReturns = 0;
 
   for (let i = 0; i <= term; i++) {
     if (i > 0) {
-      totalReturns += returnAmounts[i - 1]; // Add previous year's return to total invested
+      totalReturns += returnAmounts[i - 1];
     }
     graphData.push({
       year: startYear + i,
-      investedAmount:
-        initialDeposit + contribution * frequencyMap[frequency] * i,
+      investedAmount: initialDeposit + contribution * FREQUENCY_MAP[frequency] * i,
       returnAmount: totalReturns + returnAmounts[i],
     });
   }
@@ -149,9 +138,5 @@ const handleSubmit = ({ formData }) => {
   return { graphData, futureBalance };
 };
 
-export {
-  calculateInvestedAmount,
-  calculateReturnAmount,
-  calculateFutureBalance,
-  handleSubmit,
-};
+export type { Frequency, FormData, GraphDataPoint };
+export { calculateInvestedAmount, calculateReturnAmount, calculateFutureBalance, handleSubmit };

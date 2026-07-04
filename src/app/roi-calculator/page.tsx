@@ -18,6 +18,7 @@ import DepositFrequency from "./Frequency";
 import Percent from "./Percent";
 import Term from "./Term";
 import { handleSubmit } from "./utils";
+import type { GraphDataPoint, Frequency } from "./utils";
 import "primereact/resources/themes/mira/theme.css";
 import "primeflex/primeflex.css";
 import "./RoiCalculator.css";
@@ -25,10 +26,10 @@ import "./RoiCalculator.css";
 export default function RoiCalculator() {
   const [initialDeposit, setInitialDeposit] = useState<number | null>(null);
   const [contribution, setContribution] = useState<number | null>(null);
-  const [frequency, setFrequency] = useState("Monthly");
-  const [term, setTerm] = useState<number | 1>(1);
+  const [frequency, setFrequency] = useState<Frequency>("Monthly");
+  const [term, setTerm] = useState<number>(1);
   const [percent, setPercent] = useState<number | null>(null);
-  const [graphData, setGraphData] = useState<Array<any>>([]);
+  const [graphData, setGraphData] = useState<GraphDataPoint[]>([]);
   const [futureBalance, setFutureBalance] = useState(0);
   const usDollar = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -39,7 +40,15 @@ export default function RoiCalculator() {
   const submition = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = { initialDeposit, contribution, frequency, term, percent };
+    if (initialDeposit === null || contribution === null || percent === null) return;
+
+    const formData = {
+      initialDeposit,
+      contribution,
+      frequency: frequency as Frequency,
+      term,
+      percent,
+    };
 
     const { graphData, futureBalance } = handleSubmit({ formData });
 
