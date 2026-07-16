@@ -22,7 +22,7 @@
     "next": "16.2.10",
     "primeflex": "4.0.0",
     "primeicons": "^7.0.0",
-    "primereact": "^10.9.8",
+    "primereact": "^11.0.0",
     "react": "19.2.7",
     "react-dom": "19.2.7",
     "react-transition-group": "^4.4.5",
