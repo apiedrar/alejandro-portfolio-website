@@ -19,9 +19,7 @@
 # misc
 .DS_Store
 *.pem
-edits.js
-dependabot-alerts/
-Analyzing Project and Next Steps.md
+tsmigration-phase1plan.md
 
 # debug
 npm-debug.log*
