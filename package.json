@@ -24,7 +24,7 @@
     "primeicons": "^8.0.0",
     "primereact": "^10.9.8",
     "react": "19.2.7",
-    "react-dom": "19.2.7",
+    "react-dom": "19.2.8",
     "react-transition-group": "^4.4.5",
     "recharts": "^3.9.2"
   },
