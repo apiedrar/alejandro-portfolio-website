@@ -13,7 +13,6 @@ jobs:
         with:
           node-version-file: package.json
           cache: pnpm
-      - run: pnpm clean --lockfile
-      - run: pnpm install
+      - run: pnpm ci
       - run: pnpm lint
       - run: pnpm build
