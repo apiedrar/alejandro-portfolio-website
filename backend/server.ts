@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import cors from "cors";
+import cors, { CorsOptions } from "cors";
 import { connectDB } from "./config/db.js";
 import productRoutes from "./features/products/product.routes.js";
 
@@ -9,7 +9,7 @@ dotenv.config(); // Loads environment variables from .env file
 const app = express(); // Initializes express app
 const PORT = process.env.PORT || 5000; // Port number
 
-const corsOptions = { // Configures CORS options
+const corsOptions: CorsOptions = { // Configures CORS options
     origin: function (origin, callback) { // Function to check allowed origins
         const allowedOrigins = ['http://localhost:3000']; // List of allowed origins
 

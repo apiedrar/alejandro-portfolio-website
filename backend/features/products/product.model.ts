@@ -1,6 +1,20 @@
 import mongoose from "mongoose";
 
-const productSchema = new mongoose.Schema({
+export interface IProduct {
+    name: string;
+    price: number;
+    image: string;
+    description?: string;
+    category: string;
+    tags: string[];
+    brand: string;
+    stock?: number;
+    specifications: Map<string, unknown>;
+    onSale: boolean;
+    isActive: boolean;
+}
+
+const productSchema = new mongoose.Schema<IProduct>({
     name: {
         type: String,
         required: true,
@@ -49,6 +63,6 @@ const productSchema = new mongoose.Schema({
     timestamps: true // createdAt, updatedAt
 });
 
-const Product = mongoose.model("Product", productSchema);
+const Product = mongoose.model<IProduct>("Product", productSchema);
 
 export default Product;

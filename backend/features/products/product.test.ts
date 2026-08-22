@@ -4,10 +4,10 @@ import express from "express";
 
 // Mock the Product model BEFORE importing the routes
 
-const mockFind = jest.fn();
-const mockFindById = jest.fn();
-const mockFindByIdAndUpdate = jest.fn();
-const mockFindByIdAndDelete = jest.fn();
+const mockFind = jest.fn<(...args: unknown[]) => Promise<unknown>>();
+const mockFindById = jest.fn<(...args: unknown[]) => Promise<unknown>>();
+const mockFindByIdAndUpdate = jest.fn<(...args: unknown[]) => Promise<unknown>>();
+const mockFindByIdAndDelete = jest.fn<(...args: unknown[]) => Promise<unknown>>();
 
 jest.unstable_mockModule('./product.model.js', () => ({
     default: {

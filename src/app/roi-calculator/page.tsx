@@ -37,7 +37,7 @@ export default function RoiCalculator() {
     maximumFractionDigits: 0,
   });
 
-  const submition = (e: React.FormEvent<HTMLFormElement>) => {
+  const submition = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (initialDeposit === null || contribution === null || percent === null) return;
