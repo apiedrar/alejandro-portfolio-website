@@ -13,6 +13,6 @@ jobs:
         with:
           node-version-file: package.json
           cache: pnpm
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm ci
       - run: pnpm lint
       - run: pnpm build
