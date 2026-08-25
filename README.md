@@ -136,7 +136,7 @@ Required: `name` (≤30 chars), `price` (≥0.99), `image`, `category`, `tags`, 
 ```bash
 git clone https://github.com/apiedrar/alejandro-portfolio-website.git
 cd alejandro-portfolio-website
-git checkout mern-makeover
+git checkout dev-sandbox-e-commerce
 pnpm install
 ```
 

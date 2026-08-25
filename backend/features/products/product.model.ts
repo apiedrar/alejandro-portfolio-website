@@ -46,6 +46,7 @@ const productSchema = new mongoose.Schema<IProduct>({
     },
     stock: {
         type: Number,
+        default: 99,
     },
     specifications: {
         type: Map,
