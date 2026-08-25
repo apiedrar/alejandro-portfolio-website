@@ -8,12 +8,13 @@ This project requires two separate processes running concurrently:
 
 ```bash
 pnpm dev-client     # Next.js frontend on http://localhost:3000
-pnpm dev-server     # Express backend on http://localhost:5000 (via nodemon)
+pnpm dev-server     # Express backend on http://localhost:5000 (via tsx watch)
 ```
 
 ```bash
 pnpm build          # Production build (Next.js only)
 pnpm lint           # ESLint
+pnpm typecheck      # Type-check backend (tsc -p backend/tsconfig.json, no emit)
 pnpm test           # Run all tests (Jest + ESM)
 pnpm test:watch     # Watch mode
 pnpm test:coverage  # With coverage report
@@ -21,7 +22,7 @@ pnpm test:coverage  # With coverage report
 
 Run a single test file:
 ```bash
-NODE_OPTIONS=--experimental-vm-modules jest backend/__tests__/product.controller.test.js
+NODE_OPTIONS=--experimental-vm-modules jest backend/features/products/product.test.ts
 ```
 
 ## Architecture
@@ -35,9 +36,11 @@ The frontend (Next.js 16, port 3000) and backend (Express 5, port 5000) run as i
 - **`stores/cartStore.js`** — Zustand store with `persist` middleware (localStorage key: `cart-storage`). `getItemCount` and `getOrderTotal` are **functions** on the store, not computed values — access via `state.getItemCount()`.
 
 ### Backend (`backend/`)
-- **`server.js`** — Express 5 entry point. CORS allows `localhost:3000`. Reads `MONGO_URI` and `PORT` from `.env`.
-- **`models/`** — Mongoose schemas. `product.model.js` requires `name`, `price`, `image`, `category`, `brand`, `stock`, and `specifications` (storage, color, ram). `order.model.js` exists but order routes are not yet wired up.
-- **`routes/`** — Only `product.route.js` is currently registered (`/api/products`).
+TypeScript throughout (ESM, run directly via `tsx` — no build step), organized by feature rather than by layer.
+- **`server.ts`** — Express 5 entry point. CORS allows `localhost:3000`. Reads `MONGO_URI` and `PORT` from `.env`.
+- **`config/db.ts`** — `connectDB()`.
+- **`features/products/`** — `product.model.ts` (requires `name` ≤30 chars, `price` ≥0.99, `image`, `category`, `tags`, `brand`, `specifications`; `stock` defaults to 99 and is optional), `product.controller.ts`, `product.routes.ts` (registered at `/api/products`), `product.test.ts`.
+- **`features/orders/`** — `order.model.ts` exists but order routes are not yet wired up.
 
 ### Styling
 Tailwind CSS (primary) + PrimeReact components + PrimeFlex. Dark mode uses `dark:` Tailwind variants.
@@ -45,8 +48,8 @@ Tailwind CSS (primary) + PrimeReact components + PrimeFlex. Dark mode uses `dark
 ## Testing
 
 - All tests use **ESM** (`"type": "module"` in `package.json`). The Jest config uses `ts-jest` ESM preset.
-- `testMatch` only covers `**/*.test.js` — test files must use the `.test.js` extension, not `.test.ts`.
-- Backend tests use `jest.unstable_mockModule()` for ESM-compatible mocking. Imports that depend on mocked modules must come **after** the mock declarations (see `backend/__tests__/product.controller.test.js`).
+- `testMatch` covers `.test.ts`/`.test.tsx` — test files must use the `.test.ts` extension, not `.test.js`.
+- Backend tests use `jest.unstable_mockModule()` for ESM-compatible mocking. Imports that depend on mocked modules must come **after** the mock declarations (see `backend/features/products/product.test.ts`).
 - Frontend tests scaffolded with `@testing-library/react` but not yet implemented. Planned after order route completion.
 
 ## Environment

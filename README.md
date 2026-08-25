@@ -1,6 +1,6 @@
 # Alex's Portfolio Website
 ## Project Description
-This repository is a production portfolio site plus an in-progress Sandbox (Stripe Test Mode) E-commerce Backend, sharing the same Next.js codebase. The deployed portfolio is the public-facing hub, while the e-commerce work takes place on the `mern-makeover` branch as intentional practice ground for Spec-Driven Development, Payment-Flow Engineering, and Backend Architecture.
+This repository is a production portfolio site plus an in-progress Sandbox (Stripe Test Mode) E-commerce Backend, sharing the same Next.js codebase. The deployed portfolio is the public-facing hub, while the e-commerce work takes place on the `dev-sandbox-e-commerce` branch as intentional practice ground for Spec-Driven Development, Payment-Flow Engineering, and Backend Architecture.
 
 ### ROI Calculator
 Production-deployed investment scenarios calculator built into the portfolio. Users input: an initial deposit, recurring contributions (with frequency radio buttons: annual, monthly, weekly, or daily), investment term (1-65 years via slider), and average annual return percentage. The calculator computes compound growth over the term and renders a year-by-year stacked bar chart showing return (top) and investment (bottom) from the current year through the end of the term.
@@ -22,7 +22,7 @@ An in-progress full-stack e-commerce demo built on the same Next.js codebase, wi
 - Demo disclaimer modal
 
 **Deliberate WIP**:
-- `order.model.js` exists; order routes pending registration in `server.js`
+- `order.model.ts` exists; order routes pending registration in `server.ts`
 - Frontend tests scaffolded with `@testing-library/react`, implementation pending
 - `Navbar.tsx` currently imported per-page; planned move to `layout.tsx`
 
@@ -45,7 +45,7 @@ The deployed ROI Calculator shows I ship to production; this sandbox shows the e
 - **Next.js App Router over Pages Router**: App Router is the modern convention for Next.js and provides better support for server components, layouts, and parallel routes; thus being the most efficient option to work with on projects beyond static web pages.
 - **Zustand - State Management**: Zustand fits the scope: minimal setup, no Provider Tree, persistence to `localStorage` via the `persist` middleware out of the box. Redux would add overhead disproportionate to the cart's complexity, and Context API tends to cause unnecessary re-renders when state changes frequently. For a sandbox demonstrating MERN stack proficiency, Zustand keeps the focus on backend and payment-flow engineering rather than on state-management ceremony.
 - **MongoDB single datastore rationale**: Document storage fits the catalog naturally: products are polymorphic and carry category-specific specs (storage, color, RAM) that map cleanly to flexible  schemas, and orders will use MongoDB's Multi-Document ACID Transactions. I considered a polyglot split: MongoDB for the catalog, a relational database like PostgreSQL for orders and payments where referential integrity and constraints are enforced at the storage layer rather than in application code. For a production payments system that would make the most sense, but for a sandbox scope it adds operational overhead that would ultimately defeat the purpose. Deciding on MongoDB as the sole datastore here is a deliberate scope decision, not a default.
-- **TypeScript migration**: The frontend is already TypeScript, while the Express backend's migration is planned as a discrete reviewable change. The point here is a single source of truth for domain models (`Product` and `Order`) shared across `client` and `server`, so the API contract is enforced at compile time on both ends. Until that lands the backend remains ESM JavaScript (see Areas for Improvement).
+- **TypeScript migration**: Both frontend and backend are already TypeScript. The point here is a single source of truth for domain models (`Product` and `Order`) shared across `client` and `server`, so the API contract is enforced at compile time on both ends.
 - **ESM throughout + Jest**: ESM is the current standard for Node.js and the module system I've used most professionally. The project uses `"type": "module"` in `package.json` and ESM-compatible patterns throughout, including `jest.unstable_mockModule()` for test mocking. That being said: Jest is setup with the `ts-jest` ESM Preset. The test file extension is `.test.js` per `testMatch` configuration. The ESM mocking pattern requires imports to come after mock declarations, a known 'gotcha' properly documented in `CLAUDE.md` for anyone handling this codebase. Working with ESM matches how I build production Node.js services.
 ### Domain-specific choices
 - **Stripe Test API**: This is a demonstrative purpose sandbox project, not a real payment system. Stripe's Test API provides realistic payment flow behavior (success, failure, refunds, webhooks) without handling real funds or PCI compliance concerns. Production migration would imply switching API keys and adding production-grade error handling, monitoring, and reconciliation processes.
@@ -56,7 +56,7 @@ The deployed ROI Calculator shows I ship to production; this sandbox shows the e
 
 Base URL: `http://localhost:5000`
 
-Only the **Products** routes are currently registered (`server.js` → `app.use("/api/products", productRoutes)`). All responses are JSON and follow a `{ success, data | message }` envelope.
+Only the **Products** routes are currently registered (`server.ts` → `app.use("/api/products", productRoutes)`). All responses are JSON and follow a `{ success, data | message }` envelope.
 
 ### Products — `/api/products`
 
@@ -119,7 +119,7 @@ Required: `name` (≤30 chars), `price` (≥0.99), `image`, `category`, `tags`, 
 
 ### Orders — *Not yet wired up*
 
-`backend/models/order.model.js` exists (schema includes `orderNumber`, `items`, `totalAmount`, `status`, and Stripe session/payment-intent fields), but no order routes are registered in `server.js` yet. Endpoints will be documented here once the checkout flow lands.
+`backend/models/order.model.ts` exists (schema includes `orderNumber`, `items`, `totalAmount`, `status`, and Stripe session/payment-intent fields), but no order routes are registered in `server.ts` yet. Endpoints will be documented here once the checkout flow lands.
 
 ## Setup Instructions
 
@@ -129,14 +129,14 @@ Required: `name` (≤30 chars), `price` (≥0.99), `image`, `category`, `tags`, 
 - **pnpm** (`npm install -g pnpm`, or enable via `corepack enable`)
 - **MongoDB** — a running instance (local `mongod` or a MongoDB Atlas connection string)
 
-> Backend code and the e-commerce work live on the `mern-makeover` branch.
+> Backend code and the e-commerce work live on the `dev-sandbox-e-commerce` branch.
 
 ### 1. Clone & install
 
 ```bash
 git clone https://github.com/apiedrar/alejandro-portfolio-website.git
 cd alejandro-portfolio-website
-git checkout mern-makeover
+git checkout dev-sandbox-e-commerce
 pnpm install
 ```
 
@@ -165,7 +165,7 @@ The frontend and backend are two independent processes — run each in its own t
 
 ```bash
 pnpm dev-client   # Next.js frontend → http://localhost:3000
-pnpm dev-server   # Express backend  → http://localhost:5000 (nodemon)
+pnpm dev-server   # Express backend  → http://localhost:5000
 ```
 
 ### 5. Build for production
@@ -179,7 +179,7 @@ pnpm start        # Serve the built frontend
 
 ## How To Run Tests
 
-Tests run on Jest with the `ts-jest` ESM preset (`NODE_OPTIONS=--experimental-vm-modules`). Test files use the `.test.js` extension.
+Tests run on Jest with the `ts-jest` ESM preset (`NODE_OPTIONS=--experimental-vm-modules`). Test files use the `.test.ts` extension.
 
 ```bash
 pnpm test            # Run all tests
@@ -190,12 +190,10 @@ pnpm test:coverage   # Run with a coverage report
 Run a single test file (ESM-compatible invocation):
 
 ```bash
-NODE_OPTIONS=--experimental-vm-modules jest backend/__tests__/product.controller.test.js
+NODE_OPTIONS=--experimental-vm-modules jest backend/__tests__/product.controller.test.ts
 ```
 
 > Frontend tests are scaffolded with `@testing-library/react` but not yet implemented — planned after the order routes are completed.
 
 ## Areas For Improvement
 - `Navbar.tsx` imported per-page
-- Resctructure backend layers from 'group by file type' to 'group by feature'
-- Migrate backend from ESM JavaScript to TypeScript
