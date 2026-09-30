@@ -1,6 +1,7 @@
 import { jest, describe, it, expect, afterEach } from '@jest/globals';
 import request from "supertest";
 import express from "express";
+import { errorHandler } from '../../shared/errors/handler.js';
 
 // Mock the Product model BEFORE importing the routes
 
@@ -24,6 +25,7 @@ const { default: productRoutes } = await import('./product.routes.js');
 const app = express();
 app.use(express.json());
 app.use('/api/products', productRoutes);
+app.use(errorHandler);
 
 describe('Product API', () => {
     afterEach(() => {
@@ -60,6 +62,6 @@ describe('Product API', () => {
         // Assert the response
         expect(res.status).toBe(500);
         expect(res.body).toHaveProperty('success', false);
-        expect(res.body).toHaveProperty('message', 'Server error');
+        expect(res.body.error[0]).toHaveProperty('message', 'Something went wrong on our end');
     });
 });

@@ -17,7 +17,6 @@
 /build
 
 # misc
-SPEC.md
 .DS_Store
 *.pem
 tsmigration-phase1plan.md

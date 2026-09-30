@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors, { CorsOptions } from "cors";
 import { connectDB } from "./config/db.js";
 import productRoutes from "./features/products/product.routes.js";
+import { errorHandler } from "./shared/errors/handler.js";
 
 dotenv.config(); // Loads environment variables from .env file
 
@@ -32,6 +33,7 @@ app.use(express.json()); // Allows app to accept json data in req.body
 app.use(cors(corsOptions)); // Configures CORS middleware
 
 app.use("/api/products", productRoutes); // Routes for products
+app.use(errorHandler); // TS custom Error Middleware
 
 app.listen(PORT, () => {
     connectDB(); // Connects to MongoDB

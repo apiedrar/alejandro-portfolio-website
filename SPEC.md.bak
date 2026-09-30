@@ -1,0 +1,94 @@
+# SPEC: Orders & Payments
+
+## Context
+The end result is a working, production-grade e-commerce platform, built in MERN stack, written in TypeScript, featuring a clean RESTful API, shopping cart, webhook handling, and payment engineering consuming the Stripe Test API. This is an addition to the pre-existing Next.js home page and ROI calculator. Service delivers near full e-commerce experience to the user (guest only): product browsing, shopping cart management (quantity, adding/removing products), (Stripe Test) checkout, order confirmation/response via UI modal, individual order UI (consulted and authorized with token). Deliverable demonstrates clean API design, idiomatic variables, methods, and entities throughout; SOLID, SoC, DRY, KIS, and YAGNI principles; idempotent payment processing, webhook handling, retry logic, a clean layered backend (routes, controllers, services, models and tests per feature), centralized error handling (middleware), input/types and `env` validation, automated unit and integration testing (along with proper CI/CD configuration), and logging (Morgan, Winston and/or Pino). [Standing project context](./CLAUDE.md)
+
+## 1. Outcomes (done = ?)
+- On first use or without some sort of persisted session, a visitor sees a modal indicating none of their personal data is stored in system, and any persisted data is to keep their current session alive until they leave the website
+- A visitor can browse products, filter by category, price range, brand, build a cart (add, modify, remove), submit checkout, complete a Stripe test payment, and receive a token that retrieves their order details in the UI
+- A failed/declined card produces a modal with a user facing error message and the action required from the user (e.g.: "Try again with a different card", "The selected card has been rejected due to insuficient funds", "Invalid card", etc)
+- A duplicate submission / duplicate webhook does NOT create a second order or charge
+- In order to simulate real-world behavior/constraints: every purchase decrements inventory according to the quantity defined by the user (max=5 per purchase, indicated with a clear message in the UI), creates order atomically (preventing oversell); and the event of a user attempting to purchase an out-of-stock product (`isActive: false`) renders a modal stating the product is out-of-stock and the user can retry in a minute (the system automatically resets the stock to the default value of 99 and activates the product [`isActive: true`] after 25 seconds of the event)
+- <!-- DEFINE: any other outcome you want to guarantee -->
+
+## 2. Scope
+### In scope
+- Foundations: error middleware, ApiResponse envelope, zod env validation, zod body validation
+- Orders: create, retrieve-by-token, server-derived totals, state transitions
+- Payments: Stripe (Payment intents + Elements) test-mode flow, webhook handling, idempotency, retry policy
+- Inventory/stock
+- Authentication / user accounts
+- Email/confirmation delivery
+- Admin / fulfillment UI
+### Out of scope
+- Refunds: no real money in play, so the user wouldn't have a way to confirm
+- Discounts/coupons, multi-currency
+
+## 3. Constraints & Assumptions
+- Stack: Express 5, Mongoose 8, TS/ESM, tsx runtime, Jest+ts-jest+supertest; zod (joi or yup) - new dep
+- Stripe TEST (Payment Intents+Elements) mode only; no real funds, no PCI scope
+- Single datastore: MongoDB; order write path uses multi-document transactions
+- Currency: US dollars only, and limited to two decimals (e.g.: 49.99)
+- New env vars: STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, publishable key
+
+## 4. Decisions Already Made
+- Fixed non-PII identity ("John Doe"); no real email/addresses persisted for guest users
+- First name and email are the sole real data persisted for registered users; mock physical address and any other data "required" for checkout/billing
+- For guest users: order retrieval by an UNGUESSABLE token, not raw _id
+- For registered users: order retrieval via an `Orders` UI listing their past orders by most recent with the ability to open each and see a details summary
+- Response envelope: ApiResponse<T> = { success, data?, message? } on every endpoint.
+- Webhook is the source of truth for payment status (not the client redirect).
+- Idempotency: processed Stripe event IDs stored in a ProcessedWebhookEvent collection.
+- Stripe test cards (success / decline) surfaced in the UI via their respective modals.
+- Foundations built first as substrate; features conform to them from line one.
+- Stripe integration shape: PaymentIntents+Elements; custom flow, payment engineering visible, stronger showcase (client secret, confirmation, more webhook surface)
+
+## 5. Data Models
+### User
+- Email address stored in plain text; encrypted and database access restricted to app only for 
+### Order
+- <!-- DEFINE: fields, status enum values, token field + index -->
+- Line items: productId, quantity, <!-- DEFINE: price snapshot at purchase? -->
+- Total: server-derived from authoritative product data (never trust client)
+### Payment
+- Separate independent collection<!-- DEFINE: separate collection vs fields on Order -->
+### ProcessedWebhookEvent
+- eventId (unique), type, receivedAt  <!-- confirm final shape -->
+
+## 6. API Contract
+For each: method, path, request (zod schema), success + error responses (envelope), status codes.
+- POST /api/orders          <!-- DEFINE req/res + validation -->
+- GET  /api/orders/:token   <!-- DEFINE -->
+- POST /api/payments/...    <!-- DEFINE — depends on §4 Stripe shape -->
+- POST /api/webhooks/stripe <!-- DEFINE — raw-body carve-out, signature verify -->
+
+## 7. Key Flows
+### Checkout → payment → order
+- <!-- DEFINE: step sequence + the order/payment STATE MACHINE (states + transitions + trigger) -->
+### Failure / edge paths
+- <!-- DEFINE: declined card, abandoned/expired intent, duplicate webhook, out-of-order webhook -->
+
+## 8. Error Handling & Validation
+- <!-- DEFINE: error taxonomy → HTTP status map (validation 400, not found 404, card error, system) -->
+- All errors shaped into ApiResponse via the error middleware
+- zod schemas validate every request body + env at startup
+
+## 9. Task Breakdown (ordered; foundations first)
+1. Error middleware + async wrapper
+2. ApiResponse envelope type
+3. zod env validation
+4. zod body validation (DTOs)
+5. Order model + service + routes (guest, token retrieval)
+6. Payment service + Stripe integration
+7. Webhook receiver + idempotency store
+8. <!-- DEFINE: any splits/parallelization -->
+
+## 10. Verification Criteria (write as checkable gates)
+- Idempotency gate: replaying a webhook event creates no duplicate state
+- Totals gate: server ignores client-sent prices; total derived from DB
+- <!-- DEFINE: per-feature acceptance criteria + edge cases -->
+- <!-- DEFINE: webhook test strategy — Stripe CLI forwarding vs constructed signed payloads -->
+
+## 11. Future (explicitly deferred)
+- AI powered chatbot product recommendations
+- <!-- DEFINE: anything you're parking -->
