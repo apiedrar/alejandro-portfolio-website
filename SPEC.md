@@ -173,7 +173,7 @@ All errors pass through the centralized error middleware and leave as `ApiRespon
 ## 9. Task Breakdown (ordered; foundations first)
 1. [x] **Repair CI** — `pnpm ci` is not a pnpm command, so lint and build never run today. Replace with `pnpm install --frozen-lockfile`; add `pnpm test` and `pnpm typecheck` steps. Everything below depends on gates that actually execute.
 2. [x] Error middleware. **No async wrapper** — verified in `router@2.2.0/lib/layer.js`: Express 5 forwards a rejected promise returned by a handler to `next(err)` natively, so the Express 4 `asyncHandler` pattern is dead weight in this stack.
-3. [ ] `ApiResponse<T>` envelope type.
+3. [x] `ApiResponse<T>` envelope type.
 4. [ ] zod `env` validation at startup.
 5. [ ] zod body validation (DTOs) + the service layer the backend does not yet have.
 6. [ ] Rewrite `order.model.ts` per §5 (drop `stripeSessionId`, add `tokenHash`, reservation, new status set, integer cents).

@@ -1,7 +1,7 @@
 import { jest, describe, it, expect, afterEach } from '@jest/globals';
 import request from "supertest";
 import express from "express";
-import { errorHandler } from '../../shared/errors/handler.js';
+import { errorHandler } from '../../shared/errors/errorHandler.js';
 
 // Mock the Product model BEFORE importing the routes
 
@@ -11,7 +11,7 @@ const mockFindByIdAndUpdate = jest.fn<(...args: unknown[]) => Promise<unknown>>(
 const mockFindByIdAndDelete = jest.fn<(...args: unknown[]) => Promise<unknown>>();
 
 jest.unstable_mockModule('./product.model.js', () => ({
-    default: {
+    Product: {
         find: mockFind,
         findById: mockFindById,
         findByIdAndUpdate: mockFindByIdAndUpdate,

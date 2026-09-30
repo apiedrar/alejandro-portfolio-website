@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors, { CorsOptions } from "cors";
 import { connectDB } from "./config/db.js";
 import productRoutes from "./features/products/product.routes.js";
-import { errorHandler } from "./shared/errors/handler.js";
+import { errorHandler } from "./shared/errors/errorHandler.js";
 
 dotenv.config(); // Loads environment variables from .env file
 
