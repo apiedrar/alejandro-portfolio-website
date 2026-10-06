@@ -1,5 +1,4 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import Navbar from '../Navbar';
 import { ProductCard, DemoDisclaimerModal } from '@/components/shop';
@@ -8,7 +7,7 @@ import './shop.css';
 interface Product {
     _id: string;
     name: string;
-    price: number;
+    priceCents: number;
     image: string;
     brand?: string;
     category?: string;
@@ -32,7 +31,7 @@ export default function ShopPage() {
     const fetchProducts = async () => {
         try {
             setLoading(true);
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
             const response = await fetch(`${apiUrl}/api/products`);
             const data = await response.json();
 

@@ -14,7 +14,7 @@ export default function Home() {
       <div className="relative z-[1] flex place-items-center before:absolute before:h-[800px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-to-br before:from-transparent before:to-[#cabfdb] before:opacity-10 before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[400px] after:w-full after:translate-x-1/3 after:bg-conic-180 after:from-[#624094] after:via-[#472083] after:blur-2xl after:content-[''] after:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
         <Image
           style={{ borderRadius: "90px" }}
-          src="/Alejandro Piedra Rios Web Developer.jpeg"
+          src="/gen/Alejandro Piedra Rios Web Developer.jpeg"
           alt="Picture of Alejandro."
           width={200}
           height={200}
@@ -66,7 +66,7 @@ export default function Home() {
         </Link>
         <Link
           href="https://food-nutrition-calculator-nextjs.vercel.app/"
-          className="rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
+          className="hidden rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30"
           rel="noopener noreferrer"
         >
           <h2 className="mb-3 text-2xl font-semibold">

@@ -1,5 +1,4 @@
 'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCartStore } from '@/stores/cartStore';
@@ -8,7 +7,7 @@ import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 interface Product {
     _id: string;
     name: string;
-    price: number;
+    priceCents: number;
     image: string;
     brand?: string;
     stock?: number;
@@ -27,11 +26,12 @@ export default function ProductCard({ product }: ProductCardProps) {
         addToCart(product, 1);
     };
 
-    const formatPrice = (price: number) => {
+    const formatPrice = (priceCents: number) => {
+        const displayPrice = parseFloat((priceCents / 100).toFixed(2));
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',
-        }).format(price);
+        }).format(displayPrice);
     };
 
     return (
@@ -51,7 +51,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                     <p className="product-card-brand">{product.brand}</p>
                 )}
                 <h3 className="product-card-title">{product.name}</h3>
-                <p className="product-card-price">{formatPrice(product.price)}</p>
+                <p className="product-card-price">{formatPrice(product.priceCents)}</p>
 
                 {product.stock !== undefined && (
                     <p className={`stock-indicator ${product.stock > 10 ? 'in-stock' :

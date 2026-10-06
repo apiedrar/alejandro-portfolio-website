@@ -1,5 +1,4 @@
 'use client';
-
 import Image from 'next/image';
 import { useCartStore } from '@/stores/cartStore';
 import { TrashIcon } from '@heroicons/react/24/outline';
@@ -7,7 +6,7 @@ import { TrashIcon } from '@heroicons/react/24/outline';
 interface CartItemType {
     id: string;
     name: string;
-    price: number;
+    priceCents: number;
     image: string;
     quantity: number;
 }
@@ -20,11 +19,12 @@ export default function CartItem({ item }: CartItemProps) {
     const updateQuantity = useCartStore((state) => state.updateQuantity);
     const removeItem = useCartStore((state) => state.removeItem);
 
-    const formatPrice = (price: number) => {
+    const formatPrice = (priceCents: number) => {
+        const displayPrice = parseFloat((priceCents / 100).toFixed(2));
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',
-        }).format(price);
+        }).format(displayPrice);
     };
 
     const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +43,7 @@ export default function CartItem({ item }: CartItemProps) {
             />
             <div className="cart-item-details">
                 <h3 className="cart-item-title">{item.name}</h3>
-                <p className="cart-item-price">{formatPrice(item.price)}</p>
+                <p className="cart-item-price">{formatPrice(item.priceCents)}</p>
                 <div className="cart-item-actions">
                     <label className="flex items-center gap-2">
                         <span className="text-sm opacity-70">Qty:</span>
@@ -66,7 +66,7 @@ export default function CartItem({ item }: CartItemProps) {
                     </button>
                 </div>
                 <p className="text-sm opacity-70">
-                    Subtotal: {formatPrice(item.price * item.quantity)}
+                    Subtotal: {formatPrice(item.priceCents * item.quantity)}
                 </p>
             </div>
         </div>

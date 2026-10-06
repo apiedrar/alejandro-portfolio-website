@@ -1,12 +1,13 @@
 import { type Request, type Response, type NextFunction } from "express";
-import { ApiResponse, ApiErrorResponse } from "../http/apiResponse.js";
+import { ApiErrorResponse } from "../http/apiResponse.js";
 import { CustomError, errorCodes } from "./errorTypes.js";
 import mongoose from "mongoose";
+import { ZodError } from "zod";
 
 export const errorHandler = (
     err: Error,
     req: Request,
-    res: Response<ApiResponse<ApiErrorResponse>>,
+    res: Response<ApiErrorResponse>,
     next: NextFunction,
 ): void => {
 
@@ -19,6 +20,17 @@ export const errorHandler = (
     if (err instanceof CustomError) {
 
         err.respondWith(res);
+        return;
+
+    } else if (err instanceof ZodError) {
+
+        const errorMessages = err.issues.map((issue) => ({
+            field: issue.path.length > 0 ? issue.path.join(".") : undefined,
+            code: issue.code,
+            message: issue.message
+        }))
+
+        res.status(400).json({ success: false, error: errorMessages, timestamp: new Date().toISOString() });
         return;
 
     } else if (err instanceof mongoose.Error.ValidationError) {

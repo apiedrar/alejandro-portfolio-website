@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { Request, Response } from "express";
+import { createProductSchema, updateProductSchema } from "./product.schema.js";
 import { IProduct, Product } from "./product.model.js";
 import { ApiResponse } from "../../shared/http/apiResponse.js";
 import { NotFoundError, ValidationError } from "../../shared/errors/errorTypes.js";
@@ -32,7 +33,7 @@ export const getProductById = async (req: Request<{ id: string }>, res: Response
 
 export const createProduct = async (req: Request, res: Response<ApiResponse<IProduct>>) => {
 
-    const product = req.body; // Admin user will send this data
+    const product = createProductSchema.parse(req.body);
     const newProduct = new Product(product);
     
     await newProduct.save();
@@ -44,11 +45,12 @@ export const createProduct = async (req: Request, res: Response<ApiResponse<IPro
 export const updateProduct = async (req: Request<{ id: string }>, res: Response<ApiResponse<IProduct>>) => {
 
     const { id } = req.params;
-    const product = req.body;
     
     if (!mongoose.Types.ObjectId.isValid(id)) {
         throw new ValidationError(`${id} format is invalid. Verify and try again`, "id");
     }
+    
+    const product = updateProductSchema.parse(req.body);
     
     const updatedProduct = await Product.findByIdAndUpdate(id, product, { new: true, runValidators: true });
     

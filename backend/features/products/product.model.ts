@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export interface IProduct {
     name: string;
-    price: number;
+    priceCents: number;
     image: string;
     description?: string;
     category: string;
@@ -18,12 +18,12 @@ const productSchema = new mongoose.Schema<IProduct>({
     name: {
         type: String,
         required: true,
-        maxlength: [30, 'So thirty characters were insufficient, huh?']
+        // Dropped maxLength and annotation
     },
-    price: {
+    priceCents: {
         type: Number,
         required: true,
-        min: [0.99, 'Profit is required even in sandbox, son']
+        // Dropped min and annotation
     },
     image: {
         type: String,
