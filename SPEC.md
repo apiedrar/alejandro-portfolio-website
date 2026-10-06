@@ -41,7 +41,7 @@ Accounts, email delivery, and admin tooling are **deliberately out of scope** an
 - **Stripe TEST mode only** — PaymentIntents + Elements. No real funds, no PCI scope. Pin the Stripe API version explicitly in the SDK constructor so upstream changes cannot silently alter behavior.
 - **No real PII is stored.** Guest identity is the fixed non-PII placeholder "John Doe" with a mock address. This keeps the project outside GDPR / LFPDPPP scope; it is a constraint that must be re-evaluated the moment the auth spec lands.
 - **Single datastore**: MongoDB. The order write path uses multi-document transactions (requires a replica set — Atlas provides this; a bare local `mongod` does not).
-- **Currency**: USD only. Monetary values on Order and Payment are stored as **integer cents** (`totalCents`, `unitPriceCents`, `subtotalCents`). Binary floating point is not safe for money, and Stripe transacts exclusively in integer minor units. The catalog's `product.price` stays in dollars for display; conversion happens once, server-side, at order creation with explicit rounding.
+- **Currency**: USD only. **Every monetary value in the system is an integer, in minor units (cents) — no exceptions, no dollar-denominated field anywhere, including the catalog.** `product.price` is `priceCents` (int). Order and Payment follow the same convention (`totalCents`, `unitPriceCents`, `subtotalCents`). Binary floating point is not safe for money, and Stripe transacts exclusively in integer minor units — a single consistent representation removes the conversion boundary entirely rather than documenting where it's allowed to happen. Conversion to a dollar string is a presentation-layer concern only, done at render time, never stored. *Revised from an earlier draft that kept the catalog in dollars; reversed after tracing that `product.price` is a direct input to the server-derived order total, not a display-only value — the inconsistency it created wasn't worth defending.*
 - **New env vars**: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, and a browser-exposed publishable key. The existing `.env` has `STRIPE_PUB_KEY`, which lacks the `NEXT_PUBLIC_` prefix Elements requires client-side — it must be renamed.
 
 ## 4. Decisions Already Made
@@ -174,8 +174,9 @@ All errors pass through the centralized error middleware and leave as `ApiRespon
 1. [x] **Repair CI** — `pnpm ci` is not a pnpm command, so lint and build never run today. Replace with `pnpm install --frozen-lockfile`; add `pnpm test` and `pnpm typecheck` steps. Everything below depends on gates that actually execute.
 2. [x] Error middleware. **No async wrapper** — verified in `router@2.2.0/lib/layer.js`: Express 5 forwards a rejected promise returned by a handler to `next(err)` natively, so the Express 4 `asyncHandler` pattern is dead weight in this stack.
 3. [x] `ApiResponse<T>` envelope type.
-4. [ ] zod `env` validation at startup.
-5. [ ] zod body validation (DTOs) + the service layer the backend does not yet have.
+4. [x] zod `env` validation at startup.
+5. [x] zod body validation (DTOs) — `createProductSchema`/`updateProductSchema`, shared field definitions, routed through the `ZodError` branch in `errorHandler.ts`.
+5b. [ ] The service layer the backend does not yet have.
 6. [ ] Rewrite `order.model.ts` per §5 (drop `stripeSessionId`, add `tokenHash`, reservation, new status set, integer cents).
 7. [ ] `Payment` and `ProcessedWebhookEvent` models.
 8. [ ] Product additions (`depletedAt`) + lazy-reset helper with injectable clock.

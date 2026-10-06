@@ -35,8 +35,8 @@ describe('Product API', () => {
     it('should get all products successfully', async () => {
         // Mock data
         const mockProducts = [
-            { _id: '1', name: 'iPhone 16', price: 699, image: 'example.com/iphone16.jpg' },
-            { _id: '2', name: 'iPhone 17', price: 799, image: 'example.com/iphone17.jpg' },
+            { _id: '1', name: 'iPhone 16', price: 69900, image: 'example.com/iphone16.jpg' },
+            { _id: '2', name: 'iPhone 17', price: 79900, image: 'example.com/iphone17.jpg' },
         ];
 
         // Mock Product.find() to return our mock data

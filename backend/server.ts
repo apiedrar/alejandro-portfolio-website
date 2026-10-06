@@ -1,27 +1,24 @@
+import { env } from "./config/env.js";
 import express from "express";
-import dotenv from "dotenv";
 import cors, { CorsOptions } from "cors";
 import { connectDB } from "./config/db.js";
 import productRoutes from "./features/products/product.routes.js";
 import { errorHandler } from "./shared/errors/errorHandler.js";
 
-dotenv.config(); // Loads environment variables from .env file
-
-const app = express(); // Initializes express app
-const PORT = process.env.PORT || 5000; // Port number
-
-const corsOptions: CorsOptions = { // Configures CORS options
-    origin: function (origin, callback) { // Function to check allowed origins
-        const allowedOrigins = ['http://localhost:3000']; // List of allowed origins
+const app = express();
+const PORT = env.PORT;
+const corsOptions: CorsOptions = {
+    origin: function (origin, callback) {
+        const allowedOrigins = ['http://localhost:3000'];
 
         // Allow requests with no origin (Postman, mobile apps, etc.)
         if (!origin) return callback(null, true);
 
         // Check if the origin is allowed
         if (allowedOrigins.indexOf(origin) !== -1) {
-            callback(null, true); // Allow the request
+            callback(null, true);
         } else {
-            callback(new Error('Not allowed by CORS')); // Deny the request
+            callback(new Error('Not allowed by CORS'));
         }
     },
     credentials: true, // Allow cookies
@@ -29,13 +26,11 @@ const corsOptions: CorsOptions = { // Configures CORS options
     allowedHeaders: ['Content-Type', 'Authorization'] // Allow these headers
 };
 
-app.use(express.json()); // Allows app to accept json data in req.body
-app.use(cors(corsOptions)); // Configures CORS middleware
-
-app.use("/api/products", productRoutes); // Routes for products
+app.use(express.json());
+app.use(cors(corsOptions));
+app.use("/api/products", productRoutes);
 app.use(errorHandler); // TS custom Error Middleware
-
 app.listen(PORT, () => {
-    connectDB(); // Connects to MongoDB
-    console.log(`Server started at http://localhost:${PORT}`); // Logs server start
+    connectDB();
+    console.log(`Server started at http://localhost:${PORT} 🚀`);
 });

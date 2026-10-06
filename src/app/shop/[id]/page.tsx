@@ -1,5 +1,4 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -11,7 +10,7 @@ import '../shop.css';
 interface Product {
     _id: string;
     name: string;
-    price: number;
+    priceCents: number;
     image: string;
     description?: string;
     brand?: string;
@@ -44,7 +43,7 @@ export default function ProductDetailPage() {
     const fetchProduct = async (id: string) => {
         try {
             setLoading(true);
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://localhost:5000';
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
             const response = await fetch(`${apiUrl}/api/products/${id}`);
             const data = await response.json();
 
@@ -61,11 +60,12 @@ export default function ProductDetailPage() {
         }
     };
 
-    const formatPrice = (price: number) => {
+    const formatPrice = (priceCents: number) => {
+        const displayPrice = parseFloat((priceCents / 100).toFixed(2));
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',
-        }).format(price);
+        }).format(displayPrice);
     };
 
     const handleAddToCart = () => {
@@ -141,7 +141,7 @@ export default function ProductDetailPage() {
                         <p className="text-sm opacity-70 uppercase tracking-wider">{product.brand}</p>
                     )}
                     <h1 className="product-detail-title">{product.name}</h1>
-                    <p className="product-detail-price">{formatPrice(product.price)}</p>
+                    <p className="product-detail-price">{formatPrice(product.priceCents)}</p>
 
                     {product.stock !== undefined && (
                         <p className={`stock-indicator ${product.stock > 10 ? 'in-stock' :

@@ -21,7 +21,7 @@ export const useCartStore = create(persist((set, get) => ({
         } else {
             // Add new item to cart
             set({
-                items: [...items, { id: product._id, name: product.name, price: product.price, image: product.image, quantity }]
+                items: [...items, { id: product._id, name: product.name, priceCents: product.priceCents, image: product.image, quantity }]
             });
         }
 
@@ -48,7 +48,7 @@ export const useCartStore = create(persist((set, get) => ({
 
     // Computed values
     getOrderTotal: () => {
-        return get().items.reduce((total, item) => total + item.price * item.quantity, 0);
+        return get().items.reduce((total, item) => total + item.priceCents * item.quantity, 0);
     },
 
     getItemCount: () => {
