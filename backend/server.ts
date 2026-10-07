@@ -1,9 +1,9 @@
-import { env } from "./config/env.js";
+import { env } from "./config/env.config.js";
 import express from "express";
 import cors, { CorsOptions } from "cors";
-import { connectDB } from "./config/db.js";
+import { connectDB } from "./config/db.config.js";
 import productRoutes from "./features/products/product.routes.js";
-import { errorHandler } from "./shared/errors/errorHandler.js";
+import { errorHandler } from "./shared/errors/error.handler.js";
 
 const app = express();
 const PORT = env.PORT;

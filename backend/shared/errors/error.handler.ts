@@ -1,6 +1,6 @@
 import { type Request, type Response, type NextFunction } from "express";
-import { ApiErrorResponse } from "../http/apiResponse.js";
-import { CustomError, errorCodes } from "./errorTypes.js";
+import { ApiErrorResponse } from "../http/http.response.js";
+import { CustomError, errorCodes } from "./error.types.js";
 import mongoose from "mongoose";
 import { ZodError } from "zod";
 
