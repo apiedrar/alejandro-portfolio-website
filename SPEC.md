@@ -3,7 +3,7 @@
 ## Context
 This spec covers **guest checkout** for the e-commerce sandbox: foundations, orders, payments, and inventory. It is an addition to the pre-existing Next.js home page and ROI calculator, built on the existing product catalog (`backend/features/products/`).
 
-A visitor browses products, builds a cart, checks out through a Stripe **test-mode** payment, and later retrieves their order with an unguessable token. The deliverable demonstrates clean API design; SOLID, SoC, DRY and KISS; idempotent payment processing; webhook handling; retry logic; a layered backend (routes → controllers → services → models, with tests per feature); centralized error handling; input and `env` validation; automated unit and integration testing with CI gates; and logging.
+A visitor browses products, builds a cart, checks out through a Stripe **test-mode** payment, and later retrieves their order with an unguessable token. The deliverable demonstrates clean API design; SOLID, SoC, DRY and KISS; idempotent payment processing; webhook handling; retry logic; a layered backend routes → controllers → services → models, with tests per feature; centralized error handling; input and `env` validation; automated unit and integration testing with CI gates; and logging.
 
 Accounts, email delivery, and admin tooling are **deliberately out of scope** and specified separately (§11). That is a scoping decision, not an omission: this spec is a verification gate, and a gate only means something if it is narrow enough to close. [Standing project context](./CLAUDE.md)
 
@@ -176,17 +176,17 @@ All errors pass through the centralized error middleware and leave as `ApiRespon
 3. [x] `ApiResponse<T>` envelope type.
 4. [x] zod `env` validation at startup.
 5. [x] zod body validation (DTOs) — `createProductSchema`/`updateProductSchema`, shared field definitions, routed through the `ZodError` branch in `errorHandler.ts`.
-5b. [ ] The service layer the backend does not yet have.
-6. [ ] Rewrite `order.model.ts` per §5 (drop `stripeSessionId`, add `tokenHash`, reservation, new status set, integer cents).
-7. [ ] `Payment` and `ProcessedWebhookEvent` models.
-8. [ ] Product additions (`depletedAt`) + lazy-reset helper with injectable clock.
-9. [ ] Order service + routes: create (transactional reservation), retrieve-by-token.
-10. [ ] Reservation expiry sweeper.
-11. [ ] Payment service + Stripe integration (PaymentIntents).
-12. [ ] Webhook receiver + idempotency store + state machine.
-13. [ ] Frontend: checkout page (`/shop/checkout` is currently a dead link), Elements integration, decline and out-of-stock modals, order-retrieval UI.
+6. [ ] The service layer the backend does not yet have.
+7. [ ] Rewrite `order.model.ts` per §5 (drop `stripeSessionId`, add `tokenHash`, reservation, new status set, integer cents).
+8. [ ] `Payment` and `ProcessedWebhookEvent` models.
+9. [ ] Product additions (`depletedAt`) + lazy-reset helper with injectable clock.
+10. [ ] Order service + routes: create (transactional reservation), retrieve-by-token.
+11. [ ] Reservation expiry sweeper.
+12. [ ] Payment service + Stripe integration (PaymentIntents).
+13. [ ] Webhook receiver + idempotency store + state machine.
+14. [ ] Frontend: checkout page (`/shop/checkout` is currently a dead link), Elements integration, decline and out-of-stock modals, order-retrieval UI.
 
-Steps 2–5 are strictly sequential substrate. 6–8 are independent of each other and parallelizable. 13 depends only on the §6 contract, so it can proceed against a stubbed API once that contract is frozen.
+Steps 2–6 are strictly sequential substrate. 7–8 are independent of each other and parallelizable. 14 depends only on the §6 contract, so it can proceed against a stubbed API once that contract is frozen.
 
 ## 10. Verification Criteria
 Each gate is an automated test unless marked manual.

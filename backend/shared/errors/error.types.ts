@@ -1,5 +1,5 @@
 import { type Response } from "express";
-import type { ApiErrorResponse, ApiErrorItem } from "../http/apiResponse.js";
+import type { ApiErrorResponse, ApiErrorItem } from "../http/http.response.js";
 
 export enum errorCodes {
     NotFoundError = "NotFoundError",

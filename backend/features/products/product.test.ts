@@ -1,7 +1,7 @@
 import { jest, describe, it, expect, afterEach } from '@jest/globals';
 import request from "supertest";
 import express from "express";
-import { errorHandler } from '../../shared/errors/errorHandler.js';
+import { errorHandler } from '../../shared/errors/error.handler.js';
 
 // Mock the Product model BEFORE importing the routes
 
