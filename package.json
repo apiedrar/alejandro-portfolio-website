@@ -24,7 +24,7 @@
     "primeicons": "^8.0.2",
     "primereact": "^10.9.9",
     "react": "19.3.0",
-    "react-dom": "19.2.8",
+    "react-dom": "19.3.0",
     "react-transition-group": "^4.4.5",
     "recharts": "^3.10.1"
   },
@@ -32,7 +32,7 @@
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^26.6.3",
     "@types/react": "19.3.0",
-    "@types/react-dom": "19.2.4",
+    "@types/react-dom": "19.3.0",
     "eslint": "^10.11.0",
     "eslint-config-next": "16.3.6",
     "next": "16.3.5",
