@@ -84,8 +84,8 @@ Accounts, email delivery, and admin tooling are **deliberately out of scope** an
 **Line item** (`IOrderItem`): `productId` (ref `Product`), `productName`, `unitPriceCents`, `quantity` (1–5), `subtotalCents`. Name and price are snapshotted so later catalog edits never rewrite history.
 
 **Indexes**
-- `tokenHash` — unique.
 - `orderNumber` — unique.
+- `tokenHash` — unique.
 - Retention TTL on `createdAt` with `partialFilterExpression: { status: { $in: ['pending_payment', 'expired', 'canceled'] } }`. **The TTL window must be strictly longer than `reservationExpiresAt`**, or an order could be deleted out from under an active checkout.
 
 ### Payment
@@ -176,8 +176,8 @@ All errors pass through the centralized error middleware and leave as `ApiRespon
 3. [x] `ApiResponse<T>` envelope type.
 4. [x] zod `env` validation at startup.
 5. [x] zod body validation (DTOs) — `createProductSchema`/`updateProductSchema`, shared field definitions, routed through the `ZodError` branch in `errorHandler.ts`.
-6. [ ] The service layer the backend does not yet have.
-7. [ ] Rewrite `order.model.ts` per §5 (drop `stripeSessionId`, add `tokenHash`, reservation, new status set, integer cents).
+6. [x] The service layer the backend does not yet have.
+7. [x] Rewrite `order.model.ts` per §5 (drop `stripeSessionId`, add `tokenHash`, reservation, new status set, integer cents).
 8. [ ] `Payment` and `ProcessedWebhookEvent` models.
 9. [ ] Product additions (`depletedAt`) + lazy-reset helper with injectable clock.
 10. [ ] Order service + routes: create (transactional reservation), retrieve-by-token.

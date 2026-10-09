@@ -12,15 +12,16 @@ export default function CartPage() {
     const clearCart = useCartStore((state) => state.clearCart);
     const getOrderTotal = useCartStore((state) => state.getOrderTotal);
 
-    const formatPrice = (price: number) => {
+    const formatPrice = (priceCents: number) => {
+        const displayPrice = parseFloat((priceCents / 100).toFixed(2));
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',
-        }).format(price);
+        }).format(displayPrice);
     };
 
     const total = getOrderTotal();
-    const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+    const itemCount = items.reduce((sum: Number, item) => sum + item.quantity, 0);
 
     return (
         <main className="min-h-screen shop-container">
@@ -95,7 +96,7 @@ export default function CartPage() {
                         </div>
 
                         <p className="text-center text-sm opacity-60 mt-6">
-                            🔒 This is a demo shop using Stripe test mode. No real payments will be processed.
+                            🔒 This is a demo shop using Stripe Test mode. No real payments will be processed.
                         </p>
                     </>
                 )}
