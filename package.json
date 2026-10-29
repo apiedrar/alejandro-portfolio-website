@@ -19,7 +19,7 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "date-fns": "^4.4.0",
-    "next": "16.4.2",
+    "next": "16.4.3",
     "primeflex": "4.0.0",
     "primeicons": "^8.0.2",
     "primereact": "^10.9.9",
@@ -35,7 +35,7 @@
     "@types/react-dom": "19.3.0",
     "eslint": "^10.13.0",
     "eslint-config-next": "16.4.3",
-    "next": "16.4.2",
+    "next": "16.4.3",
     "postcss": "^8.5.31",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3"
