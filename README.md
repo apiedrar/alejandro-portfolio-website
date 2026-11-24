@@ -29,7 +29,7 @@ An in-progress full-stack e-commerce demo built on the same Next.js codebase, wi
 - `Navbar.tsx` currently imported per-page; planned move to `layout.tsx`
 - CI: `lint` and `build` are red on pre-existing frontend issues (see Areas For Improvement); backend `typecheck` and `test` are green
 
-Backend will merge to `main` once order routes are wired up and end-to-end checkout works.
+Backend will merge to `main` once order routes are wired up, end-to-end checkout works, **AND** [auth spec](./specs/auth.spec.md) is shipped.
 
 ## The 'Why?' Answered
 Most full-stack roles require an engineer who can move across the stack and reason about system design, not just describe it. This project exists to show instead of just tell. My resume lists TypeScript and Payment-Systems experience; this repo is where these materialize: a backend I architected, payment flows wired to the Stripe Test API, and every architectural decision documented and owned, including the lines Claude Code assisted with (test scaffolding, boilerplate), which are mine to defend.
