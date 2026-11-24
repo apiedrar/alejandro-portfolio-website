@@ -2,9 +2,9 @@ import { type Response } from "express";
 import type { ApiErrorResponse, ApiErrorItem } from "../http/http.response.js";
 
 export enum errorCodes {
-    NotFoundError = "NotFoundError",
-    InvalidParam = "InvalidParam",
-    ServerError = "ServerError",
+    NotFoundError = "not_found_error",
+    InvalidParam = "invalid_param",
+    ServerError = "server_error",
 }
 
 export abstract class CustomError extends Error {

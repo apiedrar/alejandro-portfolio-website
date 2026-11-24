@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { DEFAULT_STOCK } from "./products.constants.js";
 
 export interface IProduct {
     name: string;
@@ -12,6 +13,7 @@ export interface IProduct {
     specifications: Map<string, unknown>;
     onSale: boolean;
     isActive: boolean;
+    depletedAt: Date | null;
 }
 
 const productSchema = new mongoose.Schema<IProduct>({
@@ -46,7 +48,7 @@ const productSchema = new mongoose.Schema<IProduct>({
     },
     stock: {
         type: Number,
-        default: 99,
+        default: DEFAULT_STOCK,
     },
     specifications: {
         type: Map,
@@ -59,6 +61,10 @@ const productSchema = new mongoose.Schema<IProduct>({
     isActive: {
         type: Boolean,
         default: true,
+    },
+    depletedAt: {
+        type: Date,
+        default: null,
     }
 }, {
     timestamps: true // createdAt, updatedAt

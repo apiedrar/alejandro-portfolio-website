@@ -1,13 +1,14 @@
 import { z } from "zod";
+import { MAX_STOCK } from "./products.constants.js";
 
 const nameField = z.string().max(30);
-const priceCentsField = z.number().min(99);
+const priceCentsField = z.number().int().min(99);
 const imageField = z.string();
 const descriptionField = z.string().optional();
 const categoryField = z.enum(["Data Structures", "Audio Gear", "Eyewear"]);
 const tagsArray = z.array(z.string());
 const brandField = z.string();
-const stockField = z.number();
+const stockField = z.number().int().min(0).max(MAX_STOCK);
 const specsRecord = z.record(z.string().regex(/^[a-zA-Z_-]+$/), z.unknown());
 const onSaleField = z.boolean();
 const isActiveField = z.boolean();
