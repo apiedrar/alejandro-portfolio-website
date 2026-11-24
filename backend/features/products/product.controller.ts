@@ -16,7 +16,7 @@ export const getProductById = async (req: Request<{ id: string }>, res: Response
     if (!mongoose.Types.ObjectId.isValid(id)) throw new ValidationError(`${id} format is invalid. Verify and try again`, "id");
 
     const product = await getSingleProductById(id);
-    res.status(200).json({ success: true, data: product, timestamp: new Date().toISOString() });
+    res.status(201).json({ success: true, data: product, timestamp: new Date().toISOString() });
 };
 
 export const createProduct = async (req: Request, res: Response<ApiResponse<IProduct>>) => {

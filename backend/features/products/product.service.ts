@@ -2,13 +2,16 @@ import { z } from "zod";
 import { IProduct, Product } from "./product.model.js";
 import { createProductSchema, updateProductSchema } from "./product.schema.js";
 import { NotFoundError } from "../../shared/errors/error.types.js";
+import { restockDepletedProducts } from "./product.stock.js";
 
 export async function getAllProducts(): Promise<IProduct[]> {
+    await restockDepletedProducts();
     const products = await Product.find({});
     return products;
 };
 
 export async function getSingleProductById(id: string): Promise<IProduct> {
+    await restockDepletedProducts();
     const product = await Product.findById(id);
     if (!product) throw new NotFoundError(`Product ${id} does not exist`, "id");
 
