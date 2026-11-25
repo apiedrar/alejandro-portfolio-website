@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { MAX_STOCK } from "./products.constants.js";
+import { DEFAULT_STOCK, MAX_STOCK } from "./products.constants.js";
 
 const nameField = z.string().max(30);
 const priceCentsField = z.number().int().min(99);
@@ -21,7 +21,7 @@ export const createProductSchema = z.object({
     category: categoryField,
     tags: tagsArray,
     brand: brandField,
-    stock: stockField.default(127),
+    stock: stockField.default(DEFAULT_STOCK),
     specifications: specsRecord,
     onSale: onSaleField.default(false),
     isActive: isActiveField.default(true),
