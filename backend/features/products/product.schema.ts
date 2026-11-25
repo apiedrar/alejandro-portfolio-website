@@ -21,7 +21,7 @@ export const createProductSchema = z.object({
     category: categoryField,
     tags: tagsArray,
     brand: brandField,
-    stock: stockField.default(99),
+    stock: stockField.default(127),
     specifications: specsRecord,
     onSale: onSaleField.default(false),
     isActive: isActiveField.default(true),
